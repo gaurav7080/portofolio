@@ -569,7 +569,6 @@ section h2 {
   }
 }
 
-
 /* ====== Footer ====== */
 footer {
   text-align: center;
@@ -579,5 +578,272 @@ footer {
   border-top: 2px solid #00ff99;
   color: #aaa;
   margin-top: auto;
+}
+
+/* Custom cursor (dot + ring) */
+.custom-cursor-enabled { cursor: none !important; }
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 120ms ease, opacity 180ms ease;
+}
+.cursor-dot {
+  width: 9px;
+  height: 9px;
+  background: radial-gradient(circle at 30% 30%, #bfffd8, #00ff99);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0,255,153,0.9);
+}
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,255,153,0.14);
+  box-shadow: 0 0 14px rgba(0,255,153,0.06);
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+.cursor-hidden { opacity: 0 !important; }
+.cursor-hover { transform: scale(1.5) !important; border-color: rgba(0,255,153,0.45) !important; box-shadow: 0 0 26px rgba(0,255,153,0.14) !important; }
+.cursor-press { transform: scale(0.9) !important; }
+
+/* Ensure form fields use native cursor */
+input:focus, textarea:focus, select:focus, input, textarea, select { cursor: text !important; }
+
+/* Cursor toggle button — improved: vertically centered, compact, accessible */
+.cursor-toggle {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(0,0,0,0.28);
+  color: #00ff99;
+  border: 1px solid rgba(0,255,153,0.12);
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1300;
+  transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+  font-weight: 700;
+  font-size: 13px;
+}
+.cursor-toggle:hover {
+  background: rgba(0,0,0,0.45);
+  transform: translateY(-50%) scale(1.03);
+}
+.cursor-toggle:focus {
+  outline: 2px solid rgba(0,255,153,0.18);
+  outline-offset: 2px;
+}
+.cursor-toggle.off {
+  background: rgba(255,255,255,0.03);
+  color: #9adfbf;
+  opacity: 0.95;
+  transform: translateY(-50%) scale(0.98);
+  border-color: rgba(0,255,153,0.06);
+}
+
+/* Floating toggle placed in bottom-right corner */
+.cursor-toggle.floating {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: rgba(0,0,0,0.35);
+  color: #00ff99;
+  border: 1px solid rgba(0,255,153,0.12);
+  z-index: 1500;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+.cursor-toggle.floating svg { display: block; }
+.cursor-toggle.floating:hover { transform: translateY(-3px); background: rgba(0,0,0,0.5); }
+.cursor-toggle.floating:focus { outline: 2px solid rgba(0,255,153,0.18); outline-offset: 4px; }
+
+/* Hide the in-nav toggle variant (if any) */
+.cursor-toggle:not(.floating) { display: none; }
+
+@media (max-width: 900px) {
+  .cursor-toggle { display: none !important; }
+  .cursor-toggle.floating { right: 12px; bottom: 12px; }
+}
+
+.nav-wrapper { display: flex; align-items: center; gap: 12px; }
+.nav-wrapper nav { order: 1; }
+.nav-wrapper .cursor-toggle { order: 2; margin-left: 8px; }
+.nav-wrapper .hamburger { order: 3; }
+
+@media (max-width: 900px) {
+  .nav-wrapper { width: 100%; justify-content: flex-end; }
+  .nav-wrapper .cursor-toggle { display: none; }
+}
+
+/* Cursor options menu */
+.cursor-menu {
+  position: fixed;
+  right: 18px;
+  bottom: 76px; /* above floating button */
+  background: rgba(10,10,10,0.95);
+  color: #dfffe6;
+  border: 1px solid rgba(0,255,153,0.08);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  z-index: 1500;
+  width: 140px;
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+}
+.cursor-menu[aria-hidden="false"] { display: flex; }
+.cursor-menu-title { font-size: 13px; color: #9ef2c6; margin-bottom: 4px; font-weight: 700; }
+.cursor-opt {
+  background: rgba(255,255,255,0.03);
+  color: #dfffe6;
+  border: 1px solid rgba(0,255,153,0.06);
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.cursor-opt:hover { background: rgba(0,255,153,0.03); transform: translateY(-2px); }
+
+/* Variants (applied by JS to body as data attributes) */
+[data-cursor="glow"] .cursor-dot { box-shadow: 0 0 28px rgba(0,255,153,0.98); background: radial-gradient(circle at 30% 30%, #eaffee, #00ff99); }
+[data-cursor="trail"] .cursor-dot { opacity: 0.9; }
+[data-cursor="large"] .cursor-ring { width: 72px; height: 72px; border-width: 3px; }
+
+/* tiny transition for menu */
+.cursor-menu { transform-origin: bottom right; transition: transform 160ms ease, opacity 160ms ease; }
+.cursor-menu[aria-hidden="false"] { transform: translateY(-4px); opacity: 1; }
+.cursor-menu[aria-hidden="true"] { transform: translateY(0); opacity: 0; }
+
+/* Cursor variant animations and distinct styles */
+@keyframes cursor-pulse {
+  0% { box-shadow: 0 0 6px rgba(0,255,153,0.12); transform: scale(1); }
+  50% { box-shadow: 0 0 28px rgba(0,255,153,0.28); transform: scale(1.06); }
+  100% { box-shadow: 0 0 6px rgba(0,255,153,0.12); transform: scale(1); }
+}
+
+/* Subtle: small dot, faint ring (default 'professional' option) */
+[data-cursor="subtle"] .cursor-dot {
+  width: 8px; height: 8px;
+  background: radial-gradient(circle at 30% 30%, #e8fff0, #00ff99);
+  box-shadow: 0 0 6px rgba(0,255,153,0.12);
+}
+[data-cursor="subtle"] .cursor-ring {
+  border-color: rgba(0,255,153,0.10);
+  box-shadow: 0 0 8px rgba(0,255,153,0.04);
+}
+
+/* Glow: noticeable halo and gentle pulse */
+[data-cursor="glow"] .cursor-dot {
+  width: 12px; height: 12px;
+  background: radial-gradient(circle at 30% 30%, #f5fff8, #00ff99);
+  box-shadow: 0 0 36px rgba(0,255,153,0.9);
+  animation: cursor-pulse 1800ms ease-in-out infinite;
+}
+[data-cursor="glow"] .cursor-ring {
+  border-color: rgba(0,255,153,0.30);
+  box-shadow: 0 0 30px rgba(0,255,153,0.14);
+  transform: scale(1.03);
+}
+
+/* Trail: very small dot + emphasize trailing particles (optimized look) */
+[data-cursor="trail"] .cursor-dot {
+  width: 6px; height: 6px;
+  background: radial-gradient(circle at 30% 30%, #cffff0, #00ff99);
+  box-shadow: 0 0 6px rgba(0,255,153,0.14);
+}
+.trail-dot {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle at 35% 35%, #bfffd8 0%, rgba(0,255,153,0.28) 40%, rgba(0,255,153,0.04) 100%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1399;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0.95;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.trail-dot[style] { /* small nudge so removed dots scale down nicely */
+  will-change: transform, opacity;
+}
+
+/* Large: big dot and larger ring for dramatic effect */
+[data-cursor="large"] .cursor-dot {
+  width: 16px; height: 16px;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #00ff99);
+  box-shadow: 0 0 30px rgba(0,255,153,0.35);
+}
+[data-cursor="large"] .cursor-ring {
+  width: 96px; height: 96px; border-width: 3px;
+  border-color: rgba(0,255,153,0.28);
+  box-shadow: 0 0 30px rgba(0,255,153,0.12);
+}
+
+/* Zoom: aggressive enlarge on hover for a popping zoom effect */
+[data-cursor="zoom"] .cursor-dot {
+  width: 10px; height: 10px;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #00ff99);
+  box-shadow: 0 0 18px rgba(0,255,153,0.35);
+  transition: transform 120ms ease, box-shadow 180ms ease;
+}
+[data-cursor="zoom"] .cursor-ring {
+  width: 48px; height: 48px; border-width: 2px;
+  border-color: rgba(0,255,153,0.14);
+  transition: transform 140ms cubic-bezier(0.2,0.9,0.2,1), box-shadow 180ms ease;
+}
+[data-cursor="zoom"] .cursor-hover { transform: scale(2.6) !important; border-color: rgba(0,255,153,0.65) !important; box-shadow: 0 0 36px rgba(0,255,153,0.2) !important; }
+[data-cursor="zoom"] .cursor-press { transform: scale(0.8) !important; }
+
+/* subtle extra pulse when hover begins (only for zoom) */
+[data-cursor="zoom"] .cursor-dot { will-change: transform, box-shadow; }
+
+/* Reset to more neutral default when no variant is set */
+:root:not([data-cursor]) .cursor-dot {
+  width: 9px; height: 9px;
+  background: radial-gradient(circle at 30% 30%, #bfffd8, #00ff99);
+}
+
+/* Zoom lens styles (magnifier inside ring) */
+.cursor-lens {
+  position: fixed;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(0,255,153,0.12);
+  box-shadow: inset 0 4px 18px rgba(0,0,0,0.45), 0 6px 18px rgba(0,0,0,0.3);
+  backdrop-filter: none;
+}
+.cursor-lens .zoom-clone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  transform-origin: 0 0;
+  will-change: transform;
+  pointer-events: none;
 }
 
