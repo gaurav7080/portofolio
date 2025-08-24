@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cybersecurity Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <h1>MyCyberPortfolio</h1>
+      <div class="nav-wrapper">
+        <nav id="navbar">
+          <a href="#hero">Home</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="hamburger" id="hamburger" aria-label="Open navigation" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
+    <!-- Hero -->
+
+    <section id="hero">
+      <div class="hero-container">
+        <div class="hero-image">
+          <img src="pic.png" alt="My Portfolio Photo" class="profile-pic" />
+        </div>
+        <div class="hero-text">
+          <h2>Hi, I'm <span class="highlight">Gaurav Raj</span></h2>
+          <p>
+            A 2nd Year Computer Science Student specializing in
+            <span class="highlight">Cybersecurity</span>.
+          </p>
+          <div class="btn-group">
+            <a href="#projects" class="btn">View Projects</a>
+            <a href="#contact" class="btn">Contact Me</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects">
+        <div class="project">
+          <h3>Network Security Tool</h3>
+          <p>
+            A simple port scanner and vulnerability checker built in Python.
+          </p>
+        </div>
+        <div class="project">
+          <h3>Password Manager</h3>
+          <p>A secure password vault with AES encryption.</p>
+        </div>
+        <div class="project">
+          <h3>Web Exploit Demo</h3>
+          <p>Demo project showing SQLi & XSS prevention techniques.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills">
+        <span>Python</span>
+        <span>Linux</span>
+        <span>Networking</span>
+        <span>Bash scripting</span>
+        <span>C/C++</span>
+        <span>Git & github</span>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <div class="contact-links">
+        <a
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=gauravrajsaidnagar@gmail.com"
+          target="_blank"
+          ><i class="fa fa-envelope"></i>Email Me</a
+        >
+        <a href="https://github.com/yourusername" target="_blank"
+          ><i class="fab fa-github"></i>GitHub</a
+        >
+        <a href="https://linkedin.com/in/yourusername" target="_blank"
+          ><i class="fab fa-linkedin"></i>LinkedIn</a
+        >
+        <a href="https://twitter.com/yourusername" target="_blank"
+          ><i class="fab fa-twitter"></i>Twitter</a
+        >
+      </div>
+
+      <!-- Direct Message Form -->
+      <div class="contact-form">
+        <h3>Send Me a Message</h3>
+        <form id="messageForm">
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            rows="4"
+            required
+          ></textarea>
+          <button type="submit" class="btn">Send Message</button>
+          <p id="formStatus"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>© 2025 Gaurav Raj | Cybersecurity Portfolio</div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
