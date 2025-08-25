@@ -11,11 +11,13 @@
     />
   </head>
   <body>
+    <!-- Skip link for keyboard users -->
+    <a class="skip-link" href="#main">Skip to main content</a>
     <!-- Navbar -->
     <header>
       <h1>MyCyberPortfolio</h1>
       <div class="nav-wrapper">
-        <nav id="navbar">
+        <nav id="navbar" role="navigation" aria-label="Primary navigation">
           <a href="#hero">Home</a>
           <a href="#projects">Projects</a>
           <a href="#skills">Skills</a>
@@ -29,14 +31,14 @@
       </div>
     </header>
     <!-- Hero -->
-
-    <section id="hero">
+    <main id="main">
+    <section id="hero" tabindex="-1" aria-labelledby="hero-heading">
       <div class="hero-container">
         <div class="hero-image">
           <img src="pic.png" alt="My Portfolio Photo" class="profile-pic" />
         </div>
         <div class="hero-text">
-          <h2>Hi, I'm <span class="highlight">Gaurav Raj</span></h2>
+          <h2 id="hero-heading">Hi, I'm <span class="highlight">Gaurav Raj</span></h2>
           <p>
             A 2nd Year Computer Science Student specializing in
             <span class="highlight">Cybersecurity</span>.
@@ -74,12 +76,12 @@
     <section id="skills">
       <h2>Skills</h2>
       <div class="skills">
-        <span>Python</span>
-        <span>Linux</span>
-        <span>Networking</span>
-        <span>Bash scripting</span>
-        <span>C/C++</span>
-        <span>Git & github</span>
+        <span data-lang="python"><i class="fab fa-python skill-icon" aria-hidden="true"></i>Python</span>
+        <span data-lang="linux"><i class="fab fa-linux skill-icon" aria-hidden="true"></i>Linux</span>
+        <span data-lang="network"><i class="fas fa-network-wired skill-icon" aria-hidden="true"></i>Networking</span>
+        <span data-lang="bash"><i class="fas fa-terminal skill-icon" aria-hidden="true"></i>Bash scripting</span>
+        <span data-lang="c"><i class="fas fa-code skill-icon" aria-hidden="true"></i>C/C++</span>
+        <span data-lang="git"><i class="fab fa-github skill-icon" aria-hidden="true"></i>Git &amp; github</span>
       </div>
     </section>
 
@@ -107,22 +109,27 @@
         <h3>Send Me a Message</h3>
         <form id="messageForm" action="https://formspree.io/f/xwpneoqb" method="POST">
           <input type="hidden" name="_subject" value="New message from portfolio" />
-          <input type="text" name="name" placeholder="Your Name" required />
-          <input type="email" name="email" placeholder="Your Email" required />
+          <label class="sr-only" for="name">Your Name</label>
+          <input id="name" type="text" name="name" placeholder="Your Name" required />
+          <label class="sr-only" for="email">Your Email</label>
+          <input id="email" type="email" name="email" placeholder="Your Email" required />
+          <label class="sr-only" for="message">Your Message</label>
           <textarea
+            id="message"
             name="message"
             placeholder="Your Message"
             rows="4"
             required
           ></textarea>
           <button type="submit" class="btn">Send Message</button>
-          <p id="formStatus"></p>
+          <p id="formStatus" aria-live="polite"></p>
         </form>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    </main>
+    <footer role="contentinfo">
       <div>© 2025 Gaurav Raj | Cybersecurity Portfolio</div>
     </footer>
     <!-- Floating cursor toggle (keeps same id used by script) -->

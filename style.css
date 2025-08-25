@@ -272,18 +272,112 @@ section h2 {
 
 /* ====== Skills ====== */
 .skills { display: flex; flex-wrap: wrap; gap: 12px; }
+/* restore original span layout and animation behavior */
 .skills span {
   background: #111;
   border: 1px solid #222;
   padding: 10px 16px;
   border-radius: 6px;
   font-size: 15px;
-  transition: 0.3s;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
 }
 .skills span:hover {
   border-color: #00ff99;
   transform: scale(1.15) rotate(2deg);
   background: #0d0d0d;
+}
+
+/* When real icon markup is present, hide the CSS initials badge and use the icon */
+.skills span[data-lang]::before { display: none !important; }
+/* reduce default left padding so icon sits inline with text */
+.skills span[data-lang] { padding-left: 8px; }
+
+/* style inline icons (Font Awesome) to match neon theme */
+.skills .skill-icon {
+  font-size: 16px;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #00ff99;
+  text-shadow: 0 0 6px rgba(0,255,153,0.25);
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.skills span:hover .skill-icon {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 6px rgba(0,255,153,0.18));
+}
+
+/* only add icon spacing/positioning if the span declares a data-lang or helper class */
+.skills span[data-lang],
+.skills span.lang-html,
+.skills span.lang-css,
+.skills span.lang-js,
+.skills span.lang-python,
+.skills span.lang-php,
+.skills span.lang-linux,
+.skills span.lang-bash,
+.skills span.lang-c,
+.skills span.lang-git,
+.skills span.lang-network {
+  position: relative; /* allow pseudo-icon */
+  padding-left: 30px; /* space for icon */
+  display: inline-flex;
+  align-items: center;
+}
+.skills span[data-lang]::before,
+.skills span.lang-html::before,
+.skills span.lang-css::before,
+.skills span.lang-js::before,
+.skills span.lang-python::before,
+.skills span.lang-php::before,
+.skills span.lang-linux::before,
+.skills span.lang-bash::before,
+.skills span.lang-c::before,
+.skills span.lang-git::before,
+.skills span.lang-network::before {
+  background: linear-gradient(180deg, #00ff99 0%, #00cc7a 100%) !important;
+  box-shadow: 0 0 12px rgba(0,255,153,0.95), 0 0 28px rgba(0,255,153,0.12);
+  color: #001814; /* slightly dark text for contrast */
+  border: 1px solid rgba(0,255,153,0.12);
+  transition: box-shadow 220ms ease, transform 220ms ease, background 220ms ease;
+}
+
+/* subtle hover pulse on the badge itself */
+.skills span[data-lang]:hover::before {
+  box-shadow: 0 0 20px rgba(0,255,153,0.98), 0 0 44px rgba(0,255,153,0.18);
+  transform: scale(1.08);
+}
+
+/* Per-language badge colors and initials */
+.skills span[data-lang="python"]::before,
+.skills span.lang-python::before { background-color: #306998; content: "PY"; }
+.skills span[data-lang="linux"]::before,
+.skills span.lang-linux::before { background-color: #000000; content: "LN"; }
+.skills span[data-lang="network"]::before,
+.skills span.lang-network::before { background-color: #00a3a3; content: "NW"; }
+.skills span[data-lang="bash"]::before,
+.skills span.lang-bash::before { background-color: #007736; content: "SH"; }
+.skills span[data-lang="c"]::before,
+.skills span.lang-c::before { background-color: #007acc; content: "C"; }
+.skills span[data-lang="git"]::before,
+.skills span.lang-git::before { background-color: #f05033; content: "GH"; }
+.skills span[data-lang="html"]::before,
+.skills span.lang-html::before { background-color: #e34f26; content: "HT"; }
+.skills span[data-lang="css"]::before,
+.skills span.lang-css::before { background-color: #264de4; content: "CS"; }
+.skills span[data-lang="js"]::before,
+.skills span.lang-js::before { background-color: #f0db4f; color: #111; content: "JS"; }
+.skills span[data-lang="php"]::before,
+.skills span.lang-php::before { background-color: #7c6fcb; content: "PH"; }
+
+/* adjust sizing to match existing layout */
+.skills span[data-lang]::before { width: 18px; height: 18px; border-radius: 3px; left: 6px; }
+@media (max-width:600px) {
+  .skills span[data-lang]::before { width: 16px; height: 16px; left: 4px; font-size: 8px; }
 }
 
 /* ====== Contact Section Styling ====== */
@@ -423,7 +517,62 @@ section h2 {
   text-align: center;
 }
 
-/* Responsive */
+/* subtle ambient pulse ring to make the FAB feel alive */
+.fab-contact::after {
+  content: "";
+  position: absolute;
+  left: -8px; top: -8px; right: -8px; bottom: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,255,153,0.06), rgba(0,255,153,0));
+  pointer-events: none;
+  animation: fab-pulse 2.6s infinite;
+  z-index: -1;
+}
+@keyframes fab-pulse {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 0.18; }
+  100% { transform: scale(0.9); opacity: 0; }
+}
+
+/* optional floating label for larger screens */
+.fab-contact .fab-label {
+  display: none;
+  position: absolute;
+  right: 76px;
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  background: rgba(10,10,10,0.92);
+  color: #dfffe6;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,255,153,0.06);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.fab-contact:hover .fab-label { display: block; opacity: 1; transform: translateY(-50%) translateX(0); }
+
+/* small-screen adjustments */
+@media (max-width: 900px) {
+  .fab-contact { right: 12px; bottom: 12px; width: 50px; height: 50px; }
+  .fab-contact .fab-label { display: none; }
+}
+
+/* Header shimmer to convey polish and depth */
+header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.06) 48%, rgba(255,255,255,0.02) 100%);
+  mix-blend-mode: overlay;
+  opacity: 0;
+  transition: opacity 300ms ease, transform 600ms ease;
+}
+header:hover::after { opacity: 1; transform: translateX(-6%); }
+
 /* ====== Responsive Design ====== */
 @media (max-width: 1200px) {
   section {
@@ -845,4 +994,68 @@ input:focus, textarea:focus, select:focus, input, textarea, select { cursor: tex
   transform-origin: 0 0;
   will-change: transform;
   pointer-events: none;
+}
+
+/* Toned-down, theme-consistent badge override (placed after per-language rules) */
+/* Use a single, clean neon-green badge for all skills so the logos look valid and not overly glowing */
+.skills span[data-lang]::before {
+  /* solid neon color matching header and cursor */
+  background: #00ff99;
+  color: #00221a; /* dark text for contrast */
+  border: 1px solid rgba(0,0,0,0.18);
+  box-shadow: 0 0 6px rgba(0,255,153,0.14); /* subtle glow only */
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  /* ensure initials remain centered and crisp */
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+/* very subtle hover effect — small lift, small glow increase */
+.skills span[data-lang]:hover::before {
+  transform: scale(1.04);
+  box-shadow: 0 0 10px rgba(0,255,153,0.18);
+}
+
+/* make sure mobile remains compact */
+@media (max-width:600px) {
+  .skills span[data-lang]::before { box-shadow: 0 0 4px rgba(0,255,153,0.12); }
+}
+
+/* Skip-link (visually hidden but visible on keyboard focus) */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 9999;
+}
+.skip-link:focus,
+.skip-link:active {
+  position: fixed;
+  left: 12px;
+  top: 12px;
+  width: auto;
+  height: auto;
+  padding: 8px 12px;
+  background: #00ff99;
+  color: #001814;
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  font-weight: 700;
+}
+
+/* Accessible helper: visually hidden but available to screen readers */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
