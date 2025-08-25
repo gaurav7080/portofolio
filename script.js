@@ -489,3 +489,6 @@ if (form) {
     }
   });
 })();
+// git add .
+// git commit -m "Updated portfolio content"
+// git push origin main
