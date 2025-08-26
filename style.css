@@ -900,6 +900,32 @@ section h2 {
   }
 }
 
+@media (max-width: 750px) {
+  /* hero: reduce padding and scale headline */
+  #hero { padding: 36px 12px; }
+  #hero h2 { font-size: 28px; line-height: 1.15; }
+  #hero p { font-size: 15px; max-width: 92vw; }
+
+  /* buttons stack and become full-width on small screens */
+  .btn { display: block; width: calc(100% - 32px); max-width: 420px; margin: 10px auto; }
+
+  /* projects: more compact cards */
+  .project { padding: 18px; }
+
+  /* skills: make each pill/grid item expand and make bars usable */
+  .skills { gap: 10px; }
+  .skills span { width: 100%; display: block; box-sizing: border-box; }
+  .skill-bar { height: 12px; }
+  .skill-bar-fill { font-size: 0.8rem; padding-right: 8px; }
+
+  /* contact links: larger touch targets */
+  #contact .contact-links a { padding: 14px 18px; font-size: 15px; }
+  #contact .contact-links { gap: 12px; justify-content: center; }
+
+  /* nav spacing */
+  nav { gap: 16px; }
+}
+
 @media (max-width: 600px) {
   header h1 {
     font-size: 18px;
@@ -989,6 +1015,68 @@ section h2 {
   #contact .contact-links {
     justify-content: center;
   }
+}
+
+/* ====== Additional Responsive Improvements ====== */
+/* smoother breakpoints and tighter spacing for tablets & phones */
+@media (max-width: 1000px) {
+  .projects {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+  }
+  .profile-pic { width: 220px; height: 220px; }
+}
+
+@media (max-width: 750px) {
+  /* hero: reduce padding and scale headline */
+  #hero { padding: 36px 12px; }
+  #hero h2 { font-size: 28px; line-height: 1.15; }
+  #hero p { font-size: 15px; max-width: 92vw; }
+
+  /* buttons stack and become full-width on small screens */
+  .btn { display: block; width: calc(100% - 32px); max-width: 420px; margin: 10px auto; }
+
+  /* projects: more compact cards */
+  .project { padding: 18px; }
+
+  /* skills: make each pill/grid item expand and make bars usable */
+  .skills { gap: 10px; }
+  .skills span { width: 100%; display: block; box-sizing: border-box; }
+  .skill-bar { height: 12px; }
+  .skill-bar-fill { font-size: 0.8rem; padding-right: 8px; }
+
+  /* contact links: larger touch targets */
+  #contact .contact-links a { padding: 14px 18px; font-size: 15px; }
+  #contact .contact-links { gap: 12px; justify-content: center; }
+
+  /* nav spacing */
+  nav { gap: 16px; }
+}
+
+@media (max-width: 480px) {
+  /* mobile: keep things compact and readable */
+  #hero { min-height: 60vh; padding: 28px 10px; }
+  #hero h2 { font-size: 20px; }
+  .profile-pic { width: 120px; height: 120px; }
+  .projects { grid-template-columns: 1fr; gap: 14px; }
+  header { padding: 12px 14px; }
+  .btn { padding: 10px 12px; font-size: 14px; }
+  .contact-form { padding: 12px; }
+  .contact-form button { width: 100%; margin-left: 0; }
+  nav a { padding: 10px 12px; }
+  .hamburger { right: 12px; top: 12px; }
+}
+
+/* Improve images inside project cards — ensure they don't overflow */
+.project img, .profile-pic img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Slightly boost animation performance on low-powered devices */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
 
 /* ====== Footer ====== */
