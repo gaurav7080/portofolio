@@ -45,6 +45,53 @@
     ensureIds();
   }
 })();
+// Advanced anti-inspect protection
+// Disable right-click
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
+
+// Block inspect element shortcuts
+document.addEventListener('keydown', function(e) {
+  // F12, Ctrl+Shift+I/J/C/U, Cmd+Opt+I (Mac)
+  if (
+    e.key === 'F12' ||
+    (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) ||
+    (e.ctrlKey && e.key === 'U') ||
+    (e.metaKey && e.altKey && e.key === 'I')
+  ) {
+    e.preventDefault();
+    showAntiInspectOverlay();
+  }
+});
+
+// Overlay deterrent
+function showAntiInspectOverlay() {
+  if (document.getElementById('antiInspectOverlay')) return;
+  var overlay = document.createElement('div');
+  overlay.id = 'antiInspectOverlay';
+  overlay.style.position = 'fixed';
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = '100vw';
+  overlay.style.height = '100vh';
+  overlay.style.background = 'rgba(0,0,0,0.85)';
+  overlay.style.zIndex = 99999;
+  overlay.style.display = 'flex';
+  overlay.style.alignItems = 'center';
+  overlay.style.justifyContent = 'center';
+  overlay.style.color = '#fff';
+  overlay.style.fontSize = '2rem';
+  overlay.style.fontFamily = 'monospace';
+  overlay.innerHTML = 'Inspecting is disabled!';
+  overlay.onclick = function() {
+    overlay.remove();
+  };
+  document.body.appendChild(overlay);
+  setTimeout(function() {
+    overlay.remove();
+  }, 3000);
+}
 
 // Hamburger menu toggle
 const hamburger = document.getElementById('hamburger');

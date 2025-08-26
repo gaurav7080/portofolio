@@ -30,6 +30,15 @@ body {
 
 /* ====== Navbar ====== */
 /* Hamburger menu for mobile */
+
+.nav-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -39,6 +48,8 @@ body {
   height: 38px;
   cursor: pointer;
   z-index: 1100;
+  position: static;
+  margin-left: auto;
 }
 .hamburger span {
   display: block;
@@ -60,41 +71,87 @@ body {
 }
 
 @media (max-width: 900px) {
+  #contact .contact-links a {
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  #contact .contact-links a:hover {
+    border-color: #00ff99;
+    color: #00ff99;
+    box-shadow: 0 0 18px rgba(0, 255, 153, 0.3), 0 0 32px rgba(0,255,153,0.10);
+    transform: translateY(-4px) scale(1.08) skew(-2deg, 0deg);
+    background: linear-gradient(90deg, #00ff99 0%, #111 100%);
+  }
+  #contact .contact-links a:hover i {
+    transform: rotate(10deg) scale(1.2);
+  }
   .nav-wrapper {
     width: 100%;
     justify-content: flex-end;
     display: flex;
     align-items: center;
-  }
-  .hamburger {
-    margin-left: auto;
-    align-self: flex-end;
+    position: relative;
   }
   .hamburger {
     display: flex;
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    margin: 0;
+    align-self: flex-end;
+  }
+  header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+  .nav-wrapper {
+    width: auto;
+    flex: 1;
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .hamburger {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    margin: 0;
+    z-index: 1100;
   }
   nav {
     position: absolute;
-    top: 70px;
-    right: -100vw;
+    top: 60px;
+    right: 18px;
+    left: auto;
     flex-direction: column;
     background: rgba(10, 10, 10, 0.98);
     box-shadow: 0 8px 24px rgba(0,255,153,0.08);
     border-radius: 0 0 12px 12px;
-    padding: 30px 20px;
+    padding: 24px 18px;
     gap: 18px;
     min-width: 180px;
     z-index: 1001;
-    transition: right 0.3s ease;
+    transition: opacity 0.3s, visibility 0.3s, right 0.3s, top 0.3s;
+    width: max-content;
+    align-items: flex-start;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
   nav.open {
-    right: 0;
+    right: 18px;
+    top: 60px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 }
 header {
   background: rgba(10, 10, 10, 0.85);
   backdrop-filter: blur(8px);
-  padding: 22px 60px;
+  padding: 22px 24px;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -425,21 +482,22 @@ section h2 {
   border: 1px solid #222;
   font-size: 16px;
   color: #f0f0f0;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
   box-shadow: 0 0 6px rgba(0, 255, 153, 0.1);
 }
 
 #contact .contact-links a i {
   font-size: 20px;
   color: #00ff99;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 
 #contact .contact-links a:hover {
   border-color: #00ff99;
   color: #00ff99;
-  box-shadow: 0 0 12px rgba(0, 255, 153, 0.3);
-  transform: translateY(-2px) scale(1.05);
+  box-shadow: none;
+  transform: translateY(-4px) scale(1.08) skew(-2deg, 0deg);
+  background: rgba(17, 17, 17, 0.95);
 }
 
 #contact .contact-links a:hover i {
@@ -625,9 +683,10 @@ section h2 {
     border-radius: 8px;
   }
   #contact .contact-links {
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
-    align-items: stretch;
+    align-items: center;
+    justify-content: center;
   }
   #contact h2 {
     font-size: 18px;
