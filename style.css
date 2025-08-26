@@ -1,5 +1,54 @@
 /* ====== Reset ====== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+/* ====== Custom Scrollbar ====== */
+html, body {
+  scrollbar-width: thin;
+  scrollbar-color: #00ff99 #181c24;
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  width: 10px;
+  background: #10131a;
+}
+html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00ff99 0%, #005bea 100%);
+  border-radius: 8px;
+  box-shadow: 0 0 8px #00ff9988;
+  border: 2px solid #181c24;
+}
+html::-webkit-scrollbar-thumb:hover, body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00ff99 0%, #00c6fb 100%);
+}
+html::-webkit-scrollbar-track, body::-webkit-scrollbar-track {
+  background: #181c24;
+  border-radius: 8px;
+}
+
+
+
+@media (max-width: 900px) {
+  html::-webkit-scrollbar, body::-webkit-scrollbar {
+    width: 7px;
+  }
+  html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: linear-gradient(180deg, #00ff99 0%, #005bea 100%);
+  }
+  html::-webkit-scrollbar-track, body::-webkit-scrollbar-track {
+    border-radius: 6px;
+  }
+}
+@media (max-width: 600px) {
+  html::-webkit-scrollbar, body::-webkit-scrollbar {
+    width: 4px;
+  }
+  html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: linear-gradient(180deg, #00ff99 0%, #005bea 100%);
+  }
+  html::-webkit-scrollbar-track, body::-webkit-scrollbar-track {
+    border-radius: 4px;
+  }
+}
 body {
   font-family: Arial, sans-serif;
   color: #f0f0f0;
@@ -263,16 +312,19 @@ nav a:hover {
   min-height: 90vh;
   text-align: center;
   padding: 80px 20px;
-}
-#hero h2 {
-  font-size: 46px;
-  margin-bottom: 20px;
+   font-size: 26px;
+  font-weight: 700;
   color: #00ff99;
+  text-shadow: 0 0 8px rgba(0, 255, 153, 0.6);
+  letter-spacing: 2px;
 }
+
 #hero p {
   max-width: 700px;
   font-size: 18px;
   margin-bottom: 25px;
+  color:white;
+  
 }
 .btn {
   display: inline-block;
@@ -283,8 +335,12 @@ nav a:hover {
   font-size: 16px;
   color: #00ff99;
   transition: 0.3s ease;
+  text-shadow: 0 0 0;
 }
-.btn:hover { background: #00ff99; color: #111; transform: scale(1.05); }
+.btn:hover { background: #00ff99; 
+  color: #111;
+   transform: scale(1.05);
+  }
 
 /* ====== Section Styling ====== */
 /* ====== About Me Section Styling ====== */
@@ -431,6 +487,73 @@ section h2 {
 
 /* ====== Skills ====== */
 .skills { display: flex; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 900px) {
+  .skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    justify-items: center;
+    align-items: start;
+    width: 100%;
+  }
+  .skills span {
+    font-size: 13px;
+    padding: 8px 8px 18px 8px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .skills .skill-icon {
+    font-size: 15px;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+  }
+  .skill-bar {
+    height: 13px;
+    margin-top: 6px;
+    border-radius: 6px;
+  }
+  .skill-bar-fill {
+    font-size: 0.8rem;
+    line-height: 13px;
+    padding-right: 6px;
+    border-radius: 6px;
+  }
+}
+@media (max-width: 600px) {
+  .skills {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7px;
+    padding: 0 2px;
+  }
+  .skills span {
+    font-size: 11px;
+    padding: 6px 4px 14px 4px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    width: 100%;
+  }
+  .skills .skill-icon {
+    font-size: 13px;
+    width: 13px;
+    height: 13px;
+    margin-right: 4px;
+  }
+  .skill-bar {
+    height: 10px;
+    margin-top: 4px;
+    border-radius: 5px;
+  }
+  .skill-bar-fill {
+    font-size: 0.7rem;
+    line-height: 10px;
+    padding-right: 4px;
+    border-radius: 5px;
+  }
+}
 /* restore original span layout and animation behavior */
 .skills span {
   background: #111;

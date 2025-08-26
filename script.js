@@ -1,3 +1,13 @@
+// Glitch effect: copy main text into glitch layers
+document.addEventListener('DOMContentLoaded', function() {
+  var glitchMain = document.querySelector('.glitch-main');
+  var glitchLayers = document.querySelectorAll('.glitch');
+  if (glitchMain && glitchLayers.length) {
+    glitchLayers.forEach(function(layer) {
+      layer.innerHTML = glitchMain.innerHTML;
+    });
+  }
+});
 // Add robust helpers and fallbacks to avoid silent failures when elements are missing
 (function() {
   // respect user's reduced-motion preference
