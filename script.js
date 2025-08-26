@@ -114,10 +114,21 @@ if (hamburger && navbar) {
     setTimeout(() => ripple.remove(), 500);
   }
   document.querySelectorAll('#navbar a').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.stopPropagation();
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
       navbar.classList.remove('open');
       hamburger.classList.remove('active');
+      // Smooth scroll to section
+      const targetId = link.getAttribute('href').replace('#', '');
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Animate About Me section if visible
+        if (targetId === 'about') {
+          target.classList.add('about-anim');
+          setTimeout(() => target.classList.remove('about-anim'), 700);
+        }
+      }
     });
     link.addEventListener('touchstart', function(e) {
       e.stopPropagation();

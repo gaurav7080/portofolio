@@ -173,14 +173,14 @@ nav {
   gap: 35px;
 }
 nav a {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   position: relative;
   color: #f0f0f0;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.7px;
   transition: 0.3s ease;
-  padding: 6px 10px;
+  padding: 5px 12px;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
@@ -287,6 +287,75 @@ nav a:hover {
 .btn:hover { background: #00ff99; color: #111; transform: scale(1.05); }
 
 /* ====== Section Styling ====== */
+/* ====== About Me Section Styling ====== */
+#about {
+  background: rgba(17, 17, 17, 0.92);
+  border-radius: 14px;
+  box-shadow: 0 0 18px rgba(0,255,153,0.10);
+  padding: 48px 36px 38px 36px;
+  margin: 48px auto 38px auto;
+  max-width: 900px;
+  text-align: left;
+  transition: box-shadow 0.5s, transform 0.5s, background 0.5s;
+  scroll-margin-top: 90px;
+}
+#about.about-anim {
+  box-shadow: 0 0 38px 8px rgba(0,255,153,0.18);
+  transform: scale(1.03);
+  background: rgba(17, 17, 17, 0.98);
+}
+
+#about h2 {
+  color: #00ff99;
+  font-size: 32px;
+  margin-bottom: 22px;
+  letter-spacing: 1.2px;
+  border-left: 5px solid #00ff99;
+  padding-left: 16px;
+  background: linear-gradient(90deg, rgba(0,255,153,0.08) 0%, rgba(17,17,17,0.0) 100%);
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0,255,153,0.08);
+}
+.about-text {
+  font-size: 18px;
+  color: #e0ffe6;
+  line-height: 1.8;
+  animation: fadeInAbout 0.7s;
+}
+@keyframes fadeInAbout {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.about-text p {
+  margin-bottom: 18px;
+  font-size: 18px;
+  color: #e0ffe6;
+}
+.about-text .highlight {
+  color: #00ff99;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  #about {
+    padding: 28px 12px 18px 12px;
+    margin: 28px auto 18px auto;
+    max-width: 98vw;
+  }
+  #about h2 {
+    font-size: 22px;
+    padding-left: 8px;
+    margin-bottom: 12px;
+  }
+  .about-text {
+    font-size: 15px;
+  }
+  .about-text p {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+}
 section {
   padding: 90px 40px;
   max-width: 1200px;
@@ -435,9 +504,54 @@ section h2 {
 .skills span[data-lang]::before { width: 18px; height: 18px; border-radius: 3px; left: 6px; }
 @media (max-width:600px) {
   .skills span[data-lang]::before { width: 16px; height: 16px; left: 4px; font-size: 8px; }
+  #contact .contact-info {
+    padding: 4px 2px 8px 2px;
+    margin-bottom: 16px;
+  }
+  #contact .contact-info span {
+    font-size: 13px;
+    margin-bottom: 4px;
+    gap: 6px;
+    padding: 0;
+  }
+  #contact .contact-info i {
+    font-size: 15px;
+    margin-right: 6px;
+  }
 }
 
 /* ====== Contact Section Styling ====== */
+#contact .contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 22px;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+}
+#contact .contact-info span {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: #00ff99;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  box-shadow: none;
+  border: none;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+#contact .contact-info i {
+  font-size: 17px;
+  color: #00ff99;
+  margin-right: 8px;
+}
 #contact {
   text-align: left;
   padding-top: 100px;
