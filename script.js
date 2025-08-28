@@ -370,8 +370,21 @@ if (form) {
 
   const dot = document.createElement("div");
   dot.className = "cursor-dot";
+  // ensure the cursor visuals are truly centered on the pointer
+  // use fixed positioning + translate(-50%, -50%) so left/top refer to the center
+  dot.style.position = "fixed";
+  dot.style.pointerEvents = "none";
+  // center using CSS transform + simple left/top coordinates. Remove setPos and its measurements (caused over-offset). Update enable/restore code to set raw coords so translate(-50%,-50%) centers elements reliably
+  dot.style.transform = "translate(-50%, -50%)";
+  dot.style.zIndex = "2147483647";
   const ring = document.createElement("div");
   ring.className = "cursor-ring";
+  ring.style.position = "fixed";
+  ring.style.pointerEvents = "none";
+  // Nudge the ring slightly up-left to visually center its glow
+  // (the glow's blur can make the perceived center shift down-right on some displays)
+  ring.style.transform = "translate(-50%, -50%) translate(-0.6px, -0.6px)";
+  ring.style.zIndex = "2147483646";
   document.body.appendChild(ring);
   document.body.appendChild(dot);
 
@@ -383,6 +396,7 @@ if (form) {
   // Smaller lag for snappier feel
   const LAG = 0.12;
 
+  // update positions: left/top are the center (CSS handles translate(-50%,-50%))
   function update() {
     dot.style.left = mouseX + "px";
     dot.style.top = mouseY + "px";
@@ -435,10 +449,12 @@ if (form) {
             el.classList.remove("cursor-press");
             el.classList.remove("cursor-hover");
             // ensure immediate position update
-            el.style.left =
-              (window._lastMouseX || window.innerWidth / 2) + "px";
-            el.style.top =
-              (window._lastMouseY || window.innerHeight / 2) + "px";
+            // place elements centered at last known mouse coords
+            var lx = window._lastMouseX || window.innerWidth / 2;
+            var ly = window._lastMouseY || window.innerHeight / 2;
+            // raw coords suffice because CSS transform centers the elements
+            el.style.left = lx + "px";
+            el.style.top = ly + "px";
           }
         });
         // hide native cursor via inline style as a fallback
