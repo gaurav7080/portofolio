@@ -1092,6 +1092,7 @@ footer {
 
 /* Custom cursor (dot + ring) */
 .custom-cursor-enabled { cursor: none !important; }
+/* Cursor visuals: adjust ring border visibility and tone down base glow */
 .cursor-dot,
 .cursor-ring {
   position: fixed;
@@ -1107,22 +1108,42 @@ footer {
   height: 9px;
   background: radial-gradient(circle at 30% 30%, #bfffd8, #00ff99);
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0,255,153,0.9);
+  box-shadow: 0 0 8px rgba(0,255,153,0.9);
 }
+/* Make cursor ring border bright and clearly visible */
 .cursor-ring {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 2px solid rgba(0,255,153,0.14);
-  box-shadow: 0 0 14px rgba(0,255,153,0.06);
+  /* much brighter, more opaque border for visibility */
+  border: 2px solid rgba(0,255,153,0.95);
+  /* stronger but controlled glow */
+  box-shadow: 0 0 44px rgba(0,255,153,0.28), 0 0 6px rgba(0,255,153,0.18) inset;
   transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+  background: rgba(0,255,153,0.01); /* tiny tint so border appears crisp on dark backgrounds */
 }
-.cursor-hidden { opacity: 0 !important; }
-.cursor-hover { transform: scale(1.5) !important; border-color: rgba(0,255,153,0.45) !important; box-shadow: 0 0 26px rgba(0,255,153,0.14) !important; }
+/* hover/interactive state: amplify glow and border for clarity */
+.cursor-hover {
+  transform: scale(1.6) !important;
+  border-color: rgba(0,255,153,0.72) !important;
+  box-shadow: 0 0 42px rgba(0,255,153,0.28) !important;
+}
 .cursor-press { transform: scale(0.9) !important; }
 
-/* Ensure form fields use native cursor */
-input:focus, textarea:focus, select:focus, input, textarea, select { cursor: text !important; }
+/* Fix: remove thin white artifact near custom cursor */
+html, body { -webkit-tap-highlight-color: transparent; }
+/* Keep protective properties but do NOT remove the ring border (important so bright border is visible) */
+.cursor-dot, .cursor-ring {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform, opacity;
+}
+/* prevent the browser from drawing a focus ring as a thin white line — keep accessible themed focus instead */
+*:focus { outline: none !important; }
+a:focus, button:focus, input:focus, textarea:focus { box-shadow: 0 8px 28px rgba(0, 255, 153, 0.06), 0 0 0 4px rgba(0, 255, 153, 0.04) !important; }
 
 /* Cursor toggle button — improved: vertically centered, compact, accessible */
 .cursor-toggle {
@@ -1381,3 +1402,117 @@ input:focus, textarea:focus, select:focus, input, textarea, select { cursor: tex
 @media (max-width:600px) {
   .skills span[data-lang]::before { box-shadow: 0 0 4px rgba(0,255,153,0.12); }
 }
+
+/* Profile card modal (opened when clicking profile image) */
+.profile-card-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.68);
+  z-index: 2200;
+  padding: 20px;
+}
+.profile-card {
+  width: 720px;
+  max-width: 96vw;
+  background: linear-gradient(180deg, #0b0b0b, #111);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.6), 0 4px 20px rgba(0,255,153,0.06);
+  border: 1px solid rgba(0,255,153,0.06);
+  position: relative;
+  color: #e8ffe6;
+}
+.profile-card .pc-header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.profile-card .pc-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 3px solid rgba(0,255,153,0.08);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+.profile-card .pc-info { flex: 1; }
+.profile-card .pc-name {
+  color: #00ff99;
+  font-size: 20px;
+  margin: 0 0 6px 0;
+  font-weight: 800;
+}
+.profile-card .pc-bio {
+  margin: 0;
+  color: #dfffe6;
+  line-height: 1.45;
+}
+.profile-card .pc-actions { margin-top: 10px; display:flex; gap:8px; }
+.profile-card .pc-actions button { padding:8px 10px; border-radius:8px; border:1px solid rgba(0,255,153,0.06); background:transparent; color:#dfffe6; cursor:pointer }
+.profile-card .pc-actions button:hover { background: rgba(0,255,153,0.04); color:#00ff99 }
+
+.profile-card .pc-socials { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap }
+.profile-card .pc-social-link { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; background: rgba(17,17,17,0.9); border-radius:10px; color:#f0f0f0; text-decoration:none; border:1px solid rgba(0,0,0,0.14) }
+.profile-card .pc-social-link i { color:#00ff99 }
+
+.profile-card .pc-close {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  background: transparent;
+  border: none;
+  color: #cfeee0;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Modal accessibility / theme polish: remove white focus outlines, add neon focus ring and entrance animation */
+.profile-card-modal{ -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.profile-card{ transform-origin: center; will-change: transform, opacity; animation: pcModalIn 260ms cubic-bezier(.2,.9,.2,1) both; }
+@keyframes pcModalIn{ from{ opacity:0; transform: translateY(14px) scale(.985); } to{ opacity:1; transform: translateY(0) scale(1); } }
+
+/* Remove default focus outlines that appear as thin white lines; replace with themed ring */
+.profile-card :focus{ outline: none !important; }
+.profile-card button:focus, .profile-card a:focus, .profile-card input:focus, .profile-card textarea:focus{
+  outline: none !important;
+  box-shadow: 0 8px 28px rgba(0,255,153,0.06), 0 0 0 4px rgba(0,255,153,0.06) !important;
+  border-color: rgba(0,255,153,0.12) !important;
+}
+
+/* Close button: remove white focus ring and match theme */
+.profile-card .pc-close{ background: transparent; padding:6px; border-radius:8px; }
+.profile-card .pc-close:hover{ color: #00ff99; transform: scale(1.06); }
+.profile-card .pc-close:focus{ box-shadow: 0 0 0 6px rgba(0,255,153,0.08); }
+
+/* Social links hover: subtle neon glow that matches site */
+.profile-card .pc-social-link{ transition: transform 180ms ease, box-shadow 220ms ease, border-color 220ms ease, color 180ms ease; }
+.profile-card .pc-social-link:hover{ transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,255,153,0.06); border-color: rgba(0,255,153,0.08); color: #eafff0; }
+.profile-card .pc-social-link:active{ transform: translateY(-2px) scale(.995); }
+
+/* Inputs inside modal: themed focus */
+.profile-card .pc-edit-form input, .profile-card .pc-edit-form textarea{ border:1px solid rgba(255,255,255,0.04); background: #0b0b0b; color: #e8ffe6; }
+.profile-card .pc-edit-form input:focus, .profile-card .pc-edit-form textarea:focus{ border-color: #00ff99; box-shadow: 0 8px 30px rgba(0,255,153,0.06), 0 0 0 3px rgba(0,255,153,0.04); }
+
+/* Remove mobile tap highlight (white flash) */
+.profile-card a, .profile-card button, .profile-card .pc-social-link { -webkit-tap-highlight-color: transparent; }
+
+/* Ensure modal covers full viewport without showing underlying white artifacts */
+html, body { background-attachment: fixed; }
+
+/* small visual tweak: dim underlying header more when modal open */
+.profile-card-modal::before{ content:""; position:fixed; inset:0; z-index:2199; background: rgba(0,0,0,0.18); pointer-events:none; }
+
+/* Prevent unwanted blinking text caret inside the modal (hide caret globally inside modal)
+   but keep caret visible for actual text inputs/textareas. Also enforce default cursor
+   for modal so caret doesn't follow the pointer when hovering non-text elements. */
+.profile-card-modal * { caret-color: transparent !important; }
+.profile-card { cursor: default; }
+.profile-card .pc-edit-form input, .profile-card .pc-edit-form textarea { caret-color: #eafff0 !important; cursor: text; }
+.profile-card .pc-close, .profile-card button, .profile-card a { caret-color: transparent !important; }
+
+/* Defensive: ensure focusable controls inside modal don't show a thin native caret */
+.profile-card :focus { caret-color: transparent !important; }
