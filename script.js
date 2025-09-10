@@ -976,3 +976,6 @@ document.addEventListener(
     /* ignore */
   }
 })();
+// git add .
+//    git commit -m "Renamed gaurav.html to index.html and updated scripts/styles"
+//  git push origin main
