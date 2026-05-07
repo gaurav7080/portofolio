@@ -927,12 +927,16 @@ footer {
         font-size: 1.6rem;
     }
 
+    .section-title {
+        display: none;
+    }
+
     /* Prevent content from going behind fixed header */
     .hero-section, 
     .contact-section, 
     .about, 
     .projects-section {
-        padding-top: 130px;
+        padding-top: 100px; /* Reduced from 130px */
     }
 
     .hero-content { 
