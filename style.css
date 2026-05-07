@@ -928,8 +928,11 @@ footer {
     }
 
     /* Prevent content from going behind fixed header */
-    .hero-section, .contact-section {
-        padding-top: 120px;
+    .hero-section, 
+    .contact-section, 
+    .about, 
+    .projects-section {
+        padding-top: 130px;
     }
 
     .hero-content { 
