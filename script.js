@@ -418,16 +418,16 @@ if (form) {
   document.querySelectorAll(hoverTargets).forEach((el) => {
     el.addEventListener("mouseenter", () => ring.classList.add("cursor-hover"));
     el.addEventListener("mouseleave", () =>
-      ring.classList.remove("cursor-hover")
+      ring.classList.remove("cursor-hover"),
     );
   });
 
   // Press feedback: shrink ring slightly on mousedown
   document.addEventListener("mousedown", () =>
-    ring.classList.add("cursor-press")
+    ring.classList.add("cursor-press"),
   );
   document.addEventListener("mouseup", () =>
-    ring.classList.remove("cursor-press")
+    ring.classList.remove("cursor-press"),
   );
 
   // Improved toggle: show/hide cursor elements and restore positions when enabled
@@ -591,7 +591,7 @@ if (form) {
         typeof window.cursorIsEnabled === "function"
           ? window.cursorIsEnabled()
           : document.documentElement.classList.contains(
-              "custom-cursor-enabled"
+              "custom-cursor-enabled",
             );
       const next = !currently;
       if (typeof window.cursorSetEnabled === "function") {
@@ -600,7 +600,7 @@ if (form) {
         // fallback: directly toggle classes and elements
         document.documentElement.classList.toggle(
           "custom-cursor-enabled",
-          next
+          next,
         );
         document.querySelectorAll(".cursor-dot, .cursor-ring").forEach((el) => {
           el.style.display = next ? "" : "none";
@@ -902,7 +902,7 @@ document.addEventListener(
       /* ignore */
     }
   },
-  true
+  true,
 );
 
 // Accessibility: suppress visible focus outlines / caret for mouse interactions only.
@@ -951,7 +951,7 @@ document.addEventListener(
           } catch (e) {}
         }
       },
-      true
+      true,
     );
   } catch (err) {
     /* ignore safety errors */
@@ -967,8 +967,8 @@ document.addEventListener(
       s.type = "text/css";
       s.appendChild(
         document.createTextNode(
-          '\n        *:focus:not(input):not(textarea):not(select):not([contenteditable="true"]) {\n          outline: none !important;\n          box-shadow: none !important;\n          caret-color: transparent !important;\n        }\n        a:focus { outline: none !important; box-shadow: none !important; }\n      '
-        )
+          '\n        *:focus:not(input):not(textarea):not(select):not([contenteditable="true"]) {\n          outline: none !important;\n          box-shadow: none !important;\n          caret-color: transparent !important;\n        }\n        a:focus { outline: none !important; box-shadow: none !important; }\n      ',
+        ),
       );
       document.head.appendChild(s);
     }
