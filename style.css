@@ -897,10 +897,39 @@ footer {
     .spec-container {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 4rem;
+        gap: 2rem;
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
+    }
+
+    .contact-info {
+        width: 100%;
+    }
+
+    .contact-form-wrapper {
+        width: 100%;
+    }
+
+    .contact-form {
+        padding: 1.5rem; /* Reduced from 2.5rem */
+        width: 100%;
+        gap: 1.2rem;
+    }
+
+    .contact-item {
+        justify-content: center;
+        font-size: 0.95rem;
+    }
+
+    .contact-info h3 {
+        font-size: 1.6rem;
+    }
+
+    /* Prevent content from going behind fixed header */
+    .hero-section, .contact-section {
+        padding-top: 120px;
     }
 
     .hero-content { 
@@ -916,13 +945,19 @@ footer {
     }
     
     .profile-img-wrapper {
-        width: 260px;
-        height: 260px;
+        width: 240px;
+        height: 240px;
     }
 
     .hero-content h2 { 
-        font-size: 3.2rem;
-        line-height: 1.1;
+        font-size: 2.2rem; /* Reduced from 3.2rem */
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+        margin: 0 auto 1.5rem;
     }
     
     .spec-text { text-align: center; }
@@ -930,8 +965,10 @@ footer {
         flex-direction: row; 
         width: 100%;
         justify-content: center;
+        gap: 1rem;
     }
-    .stat-item { flex: 1; max-width: 150px; }
+    .stat-item { flex: 1; max-width: 140px; padding: 1.2rem; }
+    .stat-num { font-size: 1.8rem; }
 
     #navbar {
         position: fixed;
@@ -945,16 +982,16 @@ footer {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 3rem;
+        gap: 2.5rem;
         transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         z-index: 1000;
     }
 
     #navbar.open { right: 0; }
     #navbar a { 
-        font-size: 1.8rem;
+        font-size: 1.4rem;
         font-weight: 600;
-        letter-spacing: 2px;
+        letter-spacing: 1.5px;
     }
 
     .hamburger {
@@ -962,65 +999,55 @@ footer {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 6px;
+        gap: 5px;
         z-index: 1001;
         background: rgba(255, 255, 255, 0.05);
-        padding: 10px;
-        border-radius: 12px;
+        padding: 8px;
+        border-radius: 10px;
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
 }
 
 @media (max-width: 768px) {
+    .section-title { font-size: 1.8rem; margin-bottom: 2rem; }
+    
     .projects-bento {
         grid-template-columns: 1fr;
-    }
-
-    .bento-item.featured, 
-    .bento-item.wide {
-        grid-column: span 1;
-    }
-
-    .horizontal {
-        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .featured-card .project-content {
-        position: relative;
-        padding: 2.5rem 1.5rem;
-        background: rgba(10, 11, 15, 0.95);
+        padding: 1.5rem;
     }
 
-    .hero-content h2 { font-size: 2.8rem; }
+    .project-content h3 { font-size: 1.4rem; }
+    .project-desc { font-size: 0.9rem; }
     
-    section { padding: 80px 7%; }
+    section { padding: 60px 6%; }
 }
 
 @media (max-width: 480px) {
-    .hero-content h2 { font-size: 2.4rem; }
-    .hero-subtext { font-size: 1rem; }
-    .section-title { font-size: 2.4rem; }
+    .hero-content h2 { font-size: 1.8rem; }
+    .hero-subtext { font-size: 0.9rem; }
+    .section-title { font-size: 1.6rem; }
     
     .btn-group {
         flex-direction: column;
         width: 100%;
-        gap: 1rem;
+        gap: 0.8rem;
     }
 
     .btn { 
         width: 100%; 
-        text-align: center;
-        padding: 1rem;
+        padding: 0.8rem;
+        font-size: 0.9rem;
     }
 
-    .stat-num { font-size: 2rem; }
+    .stat-num { font-size: 1.5rem; }
+    .stat-label { font-size: 0.7rem; }
     
     .profile-img-wrapper {
-        width: 200px;
-        height: 200px;
-    }
-    
-    .header {
-        padding: 20px 5%;
+        width: 180px;
+        height: 180px;
     }
 }
