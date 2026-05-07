@@ -931,6 +931,18 @@ footer {
         display: none;
     }
 
+    /* Disable Custom Cursor on Mobile */
+    .cursor-dot, 
+    .cursor-ring, 
+    .cursor-toggle, 
+    .cursor-menu {
+        display: none !important;
+    }
+
+    body, * {
+        cursor: auto !important;
+    }
+
     /* Prevent content from going behind fixed header */
     .hero-section, 
     .contact-section, 
