@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaurav Raj | Cybersecurity Expert & Developer</title>
-    <meta name="description"
-        content="Portfolio of Gaurav Raj, a Computer Science student specializing in Cybersecurity.">
+    <title>Projects | Gaurav Raj</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -16,13 +14,12 @@
     <canvas id="matrix-bg"></canvas>
     <div id="scroll-progress"></div>
 
-    <!-- Header -->
     <header id="header">
         <a href="index.html" class="logo">GAURAV.DEV</a>
         <nav id="navbar">
-            <a href="index.html" class="active">Home</a>
+            <a href="index.html">Home</a>
             <a href="about.html">About</a>
-            <a href="projects.html">Projects</a>
+            <a href="projects.html" class="active">Projects</a>
             <a href="contact.html">Contact</a>
         </nav>
         <div class="hamburger" id="hamburger">
@@ -32,53 +29,53 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <main>
-        <section class="hero">
-            <div class="hero-container">
-                <div class="hero-content reveal active">
-                    <h2 class="heading">Hi, I'm <br><span class="highlight">Gaurav Raj</span></h2>
-                    <p>A 2nd Year Computer Science Student specializing in <span class="highlight">Cybersecurity</span>.
-                        I build secure systems and protect digital infrastructure.</p>
-                    <div class="btn-group">
-                        <a href="projects.html" class="btn btn-primary">View Projects <i
-                                class="fas fa-arrow-right"></i></a>
-                        <a href="MyResume.pdf" download class="btn btn-outline">Download CV <i
-                                class="fas fa-download"></i></a>
+        <section class="projects-section">
+            <h2 class="section-title reveal">My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card reveal">
+                    <div class="project-icon"><i class="fas fa-shield-alt fa-3x" style="color: var(--primary);"></i>
+                    </div>
+                    <br>
+                    <h3>Network Security Tool</h3>
+                    <p>A simple port scanner and vulnerability checker built in Python to identify open ports and
+                        potential security flaws in a network.</p>
+                    <div class="project-tags">
+                        <span>Python</span>
+                        <span>Networking</span>
+                        <span>Security</span>
                     </div>
                 </div>
-                <div class="hero-image reveal active">
-                    <div class="profile-img-wrapper">
-                        <img src="pic.png" alt="Gaurav Raj" class="profile-pic">
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Featured Skills -->
-        <section class="featured-skills">
-            <h2 class="section-title reveal">Key Expertise</h2>
-            <div class="skills-grid">
-                <div class="skill-category reveal">
-                    <h3><i class="fas fa-shield-alt"></i> Cybersecurity</h3>
-                    <p>Nmap, Wireshark, Kali Linux, CCNA</p>
+                <div class="project-card reveal">
+                    <div class="project-icon"><i class="fas fa-vault fa-3x" style="color: var(--primary);"></i></div>
+                    <br>
+                    <h3>Password Manager</h3>
+                    <p>A secure password vault with AES encryption, designed to store and manage credentials safely with
+                        a user-friendly interface.</p>
+                    <div class="project-tags">
+                        <span>Python</span>
+                        <span>Cryptography</span>
+                        <span>AES</span>
+                    </div>
                 </div>
-                <div class="skill-category reveal">
-                    <h3><i class="fas fa-laptop-code"></i> Development</h3>
-                    <p>C, C++, Python, JavaScript, Bash</p>
+
+                <div class="project-card reveal">
+                    <div class="project-icon"><i class="fas fa-bug fa-3x" style="color: var(--primary);"></i></div>
+                    <br>
+                    <h3>Web Exploit Demo</h3>
+                    <p>A demonstration project highlighting SQL Injection and Cross-Site Scripting (XSS) prevention
+                        techniques to educate on web security.</p>
+                    <div class="project-tags">
+                        <span>Web Security</span>
+                        <span>HTML/CSS</span>
+                        <span>JavaScript</span>
+                    </div>
                 </div>
-                <div class="skill-category reveal">
-                    <h3><i class="fas fa-graduation-cap"></i> Core CS</h3>
-                    <p>Data Structures, Algorithms, Networking</p>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="about.html" class="btn btn-outline">View All Skills</a>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="social-links">
             <a href="https://github.com/gaurav7080" target="_blank"><i class="fab fa-github"></i></a>

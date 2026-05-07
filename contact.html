@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me | Gaurav Raj</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <canvas id="matrix-bg"></canvas>
+    <div id="scroll-progress"></div>
+
+    <header id="header">
+        <a href="index.html" class="logo">GAURAV.DEV</a>
+        <nav id="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <main>
+        <section class="contact-section">
+            <h2 class="section-title reveal">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info reveal">
+                    <h3>Let's talk about everything!</h3>
+                    <p>Don't like forms? Send me an email or find me on social media.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>gauravrajsaidnagar@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 7368824064</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Ambala, Haryana</span>
+                        </div>
+                        <div class="contact-item" style="margin-top: 1rem;">
+                            <a href="MyResume.pdf" download class="btn btn-outline" style="width: 100%;">Download CV <i class="fas fa-download"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper reveal">
+                    <form id="messageForm" action="https://formspree.io/f/xwpneoqb" method="POST" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="How can I help you?" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message <i class="fas fa-paper-plane"></i></button>
+                        <p id="formStatus"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/gaurav7080" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/its-me-gaurav" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://instagram.com/gaurav_raj1907" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:gauravrajsaidnagar@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p>&copy; 2025 Gaurav Raj | Built with Passion</p>
+    </footer>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- Cursor Customization -->
+    <button id="cursorToggle" class="cursor-toggle" title="Customize Cursor">
+        <i class="fas fa-mouse-pointer"></i>
+    </button>
+
+    <div id="cursorMenu" class="cursor-menu">
+        <div class="cursor-menu-title">Control</div>
+        <button id="cursorPower" class="cursor-opt">Toggle On/Off</button>
+        <div class="cursor-menu-title">Style</div>
+        <button class="cursor-opt" data-variant="subtle">Subtle</button>
+        <button class="cursor-opt" data-variant="glow">Glow</button>
+        <button class="cursor-opt" data-variant="trail">Trail</button>
+        <button class="cursor-opt" data-variant="large">Large</button>
+        <button class="cursor-opt" data-variant="zoom">Zoom</button>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
