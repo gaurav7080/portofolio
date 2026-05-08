@@ -12,6 +12,14 @@
 </head>
 
 <body>
+    <div class="loader-wrapper">
+        <div class="loader">
+            <div class="loader-circle"></div>
+        </div>
+        <div class="loader-text">ESTABLISHING SECURE CONNECTION...</div>
+        <div class="loader-bar"></div>
+    </div>
+
     <div class="bg-gradient"></div>
     <canvas id="matrix-bg"></canvas>
     <div id="scroll-progress"></div>
@@ -38,8 +46,8 @@
         <section class="hero">
             <div class="hero-container">
                 <div class="hero-content reveal active">
-                    <h2 class="heading">Hi, I'm <br><span class="highlight">Gaurav Raj</span></h2>
-                    <p>A 2nd Year Computer Science Student specializing in <span class="highlight">Cybersecurity</span>.
+                    <h2 class="heading">Hi, I'm <br><span class="highlight" id="typing-text">Gaurav Raj</span><span class="typing-cursor">|</span></h2>
+                    <p>A 3rd Year Computer Science Student specializing in <span class="highlight">Cybersecurity</span>.
                         I build secure systems and protect digital infrastructure.</p>
                     <div class="btn-group">
                         <a href="projects.html" class="btn btn-primary">View Projects <i

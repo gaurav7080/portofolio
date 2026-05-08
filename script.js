@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollProgress();
   initProfileModal();
   initSkillCardTracking();
+  initPreloader();
+  initTypingAnimation();
 });
 
 // ====== Matrix Rain Effect ======
@@ -364,7 +366,7 @@ function initProfileModal() {
             <img src="pic.png" alt="Gaurav Raj" class="modal-img">
             <h2 class="modal-name">Gaurav Raj</h2>
             <p class="modal-title">Cybersecurity Enthusiast & Dev</p>
-            <p class="modal-bio">2nd Year CS Student specializing in Cybersecurity. Passionate about building secure systems and ethical hacking.</p>
+            <p class="modal-bio">3rd Year CS Student specializing in Cybersecurity. Passionate about building secure systems and ethical hacking.</p>
             <div class="modal-socials">
                 <a href="https://github.com/gaurav7080" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="https://linkedin.com/in/its-me-gaurav" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -409,4 +411,80 @@ function initSkillCardTracking() {
       card.style.setProperty('--mouse-y', `${y}%`);
     });
   });
+}
+
+// ====== Preloader Logic ======
+function initPreloader() {
+  const loader = document.querySelector('.loader-wrapper');
+  if (!loader) return;
+
+  // Hide loader on window load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      loader.classList.add('fade-out');
+    }, 200);
+  });
+
+  // Show loader on internal link clicks for smooth transition
+  const internalLinks = document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="#"]):not([href^="mailto:"]):not([href^="tel:"])');
+  
+  internalLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      
+      // Check if it's an internal page link
+      if (href && (href.endsWith('.html') || !href.includes('.')) && !href.startsWith('http')) {
+        e.preventDefault();
+        loader.classList.remove('fade-out');
+        
+        setTimeout(() => {
+          window.location.href = href;
+        }, 300); // Faster transition
+      }
+    });
+  });
+}
+
+// ====== Typing Animation ======
+function initTypingAnimation() {
+  const textElement = document.getElementById('typing-text');
+  if (!textElement) return;
+
+  const words = [
+    "Gaurav Raj",
+    "Developer",
+    "Cyber Expert"
+  ];
+  
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingSpeed = 100;
+
+  function type() {
+    const currentWord = words[wordIndex];
+    
+    if (isDeleting) {
+      textElement.textContent = currentWord.substring(0, charIndex - 1);
+      charIndex--;
+      typingSpeed = 50;
+    } else {
+      textElement.textContent = currentWord.substring(0, charIndex + 1);
+      charIndex++;
+      typingSpeed = 150;
+    }
+
+    if (!isDeleting && charIndex === currentWord.length) {
+      isDeleting = true;
+      typingSpeed = 2000; // Wait at the end of the word
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      typingSpeed = 500;
+    }
+
+    setTimeout(type, typingSpeed);
+  }
+
+  type();
 }
