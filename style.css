@@ -465,6 +465,8 @@ section {
     transition: var(--transition-smooth);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card:hover {
@@ -483,6 +485,7 @@ section {
     color: var(--text-dim);
     font-size: 0.95rem;
     margin-bottom: 1.5rem;
+    flex-grow: 1; /* Pushes links to the bottom */
 }
 
 .project-tags {
@@ -498,6 +501,64 @@ section {
     font-size: 0.8rem;
     color: var(--primary);
     border: 1px solid var(--glass-border);
+}
+
+.project-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--glass-border);
+    transition: var(--transition-smooth);
+}
+
+.project-card:hover .project-image {
+    border-color: var(--primary);
+    transform: scale(1.02);
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.project-link {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    transition: var(--transition-smooth);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.project-link.view {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    border: 1px solid var(--glass-border);
+}
+
+.project-link.live {
+    background: var(--primary);
+    color: var(--bg-dark);
+    border: 1px solid var(--primary);
+}
+
+.project-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--primary-glow);
+}
+
+.project-link.view:hover {
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 /* ====== Skills Section ====== */
@@ -1311,6 +1372,32 @@ a {
     color: var(--text-dim);
     font-size: 0.9rem;
     line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.view-cert-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(0, 255, 153, 0.05);
+    color: var(--primary);
+    border: 1px solid rgba(0, 255, 153, 0.3);
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: var(--transition-smooth);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.view-cert-btn:hover {
+    background: var(--primary);
+    color: var(--bg-dark);
+    border-color: var(--primary);
+    box-shadow: 0 0 15px var(--primary-glow);
+    transform: translateY(-2px);
 }
 
 /* ====== Footer Components ====== */
