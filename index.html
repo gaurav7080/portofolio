@@ -12,23 +12,44 @@
 </head>
 
 <body>
+    <!-- Futuristic Preloader -->
     <div class="loader-wrapper">
-        <div class="loader">
-            <div class="loader-circle"></div>
+        <div class="loader-hex">
+            <div class="hex-ring"></div>
+            <div class="hex-ring"></div>
+            <div class="hex-ring"></div>
+            <div class="loader-logo">G</div>
         </div>
-        <div class="loader-text">LOADING...</div>
-        <div class="loader-bar"></div>
+        <div class="loader-text">INITIALIZING SYSTEM<span class="loader-dots"></span></div>
+        <div class="loader-bar">
+            <div class="loader-bar-fill"></div>
+        </div>
+        <div class="loader-status">Establishing secure connection...</div>
     </div>
 
+    <!-- 3D Particle Universe -->
+    <canvas id="particle-universe"></canvas>
     <div class="bg-gradient"></div>
-    <canvas id="matrix-bg"></canvas>
+
+    <!-- Scroll Progress -->
     <div id="scroll-progress"></div>
+
+    <!-- Floating Nav Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator">
+        <div class="scroll-dot active" data-section="hero"></div>
+        <div class="scroll-dot" data-section="stats"></div>
+        <div class="scroll-dot" data-section="expertise"></div>
+        <div class="scroll-dot" data-section="journey"></div>
+    </div>
 
     <!-- Header -->
     <header id="header">
-        <a href="index.html" class="logo">GAURAV.DEV</a>
+        <a href="index.html" class="logo">
+            <span class="logo-bracket">&lt;</span>GAURAV<span class="logo-dot">.</span>DEV<span
+                class="logo-bracket">/&gt;</span>
+        </a>
         <nav id="navbar">
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active">Home</a>
             <a href="about.html">About</a>
             <a href="education.html">Education</a>
             <a href="projects.html">Projects</a>
@@ -41,61 +62,310 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <main>
-        <section class="hero">
+        <!-- Hero Section - Futuristic -->
+        <section class="hero" id="hero-section">
+            <div class="hero-bg-lines">
+                <div class="h-line"></div>
+                <div class="h-line"></div>
+                <div class="h-line"></div>
+                <div class="v-line"></div>
+                <div class="v-line"></div>
+                <div class="v-line"></div>
+            </div>
             <div class="hero-container">
                 <div class="hero-content reveal active">
-                    <h2 class="heading">Hi, I'm <br><span class="highlight" id="typing-text">Gaurav Raj</span><span class="typing-cursor">|</span></h2>
-                    <p>A 3rd Year Computer Science Student specializing in <span class="highlight">Cybersecurity</span>.
-                        I build secure systems and protect digital infrastructure.</p>
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        <span>Available for Opportunities</span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="title-line title-line-1">
+                            <span class="title-word" data-text="Hi,">Hi,</span>
+                            <span class="title-word" data-text="I'm">I'm</span>
+                        </span>
+                        <span class="title-line title-line-2">
+                            <span class="highlight glitch-text" id="typing-text" data-text="Gaurav Raj">Gaurav
+                                Raj</span><span class="typing-cursor">|</span>
+                        </span>
+                    </h1>
+                    <div class="hero-roles">
+                        <span class="role-tag"><i class="fas fa-shield-alt"></i> Cybersecurity Enthusiast</span>
+                        <span class="role-tag"><i class="fas fa-code"></i> Full Stack Developer</span>
+                        <span class="role-tag"><i class="fas fa-graduation-cap"></i> 3rd Year CSE Student</span>
+                    </div>
+                    <p class="hero-desc">A passionate Computer Science student at <span class="highlight">MM
+                            University</span>,
+                        specializing in <span class="highlight">Cybersecurity</span> & <span class="highlight">Full
+                            Stack Development</span>.
+                        I build secure systems, craft modern web experiences, and protect digital infrastructure.</p>
                     <div class="btn-group">
-                        <a href="projects.html" class="btn btn-primary">View Projects <i
-                                class="fas fa-arrow-right"></i></a>
-                        <a href="MyResume.pdf" download class="btn btn-outline">Download CV <i
-                                class="fas fa-download"></i></a>
+                        <a href="projects.html" class="btn btn-primary btn-futuristic">
+                            <span class="btn-text">View Projects</span>
+                            <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                            <span class="btn-glow"></span>
+                        </a>
+                        <a href="MyResume.pdf" download class="btn btn-outline btn-futuristic">
+                            <span class="btn-text">Download CV</span>
+                            <span class="btn-icon"><i class="fas fa-download"></i></span>
+                            <span class="btn-glow"></span>
+                        </a>
+                        <a href="contact.html" class="btn btn-ghost btn-futuristic">
+                            <span class="btn-text">Hire Me</span>
+                            <span class="btn-icon"><i class="fas fa-rocket"></i></span>
+                            <span class="btn-glow"></span>
+                        </a>
+                    </div>
+                    <div class="hero-socials">
+                        <a href="https://github.com/gaurav7080" target="_blank" class="social-hex"
+                            aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/its-me-gaurav" target="_blank" class="social-hex"
+                            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://instagram.com/gaurav_raj1907" target="_blank" class="social-hex"
+                            aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:gauravrajsaidnagar@gmail.com" class="social-hex" aria-label="Email"><i
+                                class="fas fa-envelope"></i></a>
                     </div>
                 </div>
                 <div class="hero-image reveal active">
-                    <div class="profile-img-wrapper">
-                        <img src="pic.png" alt="Gaurav Raj" class="profile-pic">
+                    <div class="profile-3d-container">
+                        <div class="orbit-ring orbit-1"></div>
+                        <div class="orbit-ring orbit-2"></div>
+                        <div class="orbit-ring orbit-3"></div>
+                        <div class="profile-img-wrapper">
+                            <img src="pic.png" alt="Gaurav Raj" class="profile-pic">
+                            <div class="profile-hud">
+                                <span class="hud-corner hud-tl"></span>
+                                <span class="hud-corner hud-tr"></span>
+                                <span class="hud-corner hud-bl"></span>
+                                <span class="hud-corner hud-br"></span>
+                            </div>
+                        </div>
+                        <div class="floating-tech floating-tech-1"><i class="fab fa-python"></i></div>
+                        <div class="floating-tech floating-tech-2"><i class="fas fa-shield-alt"></i></div>
+                        <div class="floating-tech floating-tech-3"><i class="fab fa-js"></i></div>
+                        <div class="floating-tech floating-tech-4"><i class="fas fa-terminal"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-down-indicator">
+                <span>Scroll to Explore</span>
+                <div class="scroll-arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Counter Section -->
+        <section class="stats-section" id="stats-section">
+            <div class="section-header">
+                <span class="section-tag">&lt;stats /&gt;</span>
+                <h2 class="section-title reveal">By The Numbers</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card reveal" data-delay="0">
+                    <div class="stat-icon"><i class="fas fa-project-diagram"></i></div>
+                    <div class="stat-number" data-count="10">0</div>
+                    <div class="stat-label">Projects Built</div>
+                    <div class="stat-bar">
+                        <div class="stat-bar-fill" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div class="stat-card reveal" data-delay="100">
+                    <div class="stat-icon"><i class="fas fa-code"></i></div>
+                    <div class="stat-number" data-count="8">0</div>
+                    <div class="stat-label">Technologies</div>
+                    <div class="stat-bar">
+                        <div class="stat-bar-fill" style="width: 70%"></div>
+                    </div>
+                </div>
+                <div class="stat-card reveal" data-delay="200">
+                    <div class="stat-icon"><i class="fas fa-certificate"></i></div>
+                    <div class="stat-number" data-count="4">0</div>
+                    <div class="stat-label">Certifications</div>
+                    <div class="stat-bar">
+                        <div class="stat-bar-fill" style="width: 60%"></div>
+                    </div>
+                </div>
+                <div class="stat-card reveal" data-delay="300">
+                    <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="stat-number" data-count="3">0</div>
+                    <div class="stat-label">Years Learning</div>
+                    <div class="stat-bar">
+                        <div class="stat-bar-fill" style="width: 50%"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Featured Skills -->
-        <section class="featured-skills">
-            <h2 class="section-title reveal">Key Expertise</h2>
+        <!-- Featured Skills with 3D Cards -->
+        <section class="featured-skills" id="expertise-section">
+            <div class="section-header">
+                <span class="section-tag">&lt;expertise /&gt;</span>
+                <h2 class="section-title reveal">Key Expertise</h2>
+                <p class="section-subtitle reveal">Specialized domains I'm deeply passionate about</p>
+            </div>
             <div class="skills-grid">
-                <div class="skill-category reveal">
-                    <h3><i class="fas fa-shield-alt"></i> Cybersecurity</h3>
-                    <p>Nmap, Wireshark, Kali Linux, CCNA</p>
+                <div class="skill-category reveal" data-tilt>
+                    <div class="skill-icon-wrapper">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
+                    <h3>Cybersecurity</h3>
+                    <p>Network security, ethical hacking, penetration testing, and vulnerability assessment using
+                        industry tools.</p>
+                    <div class="skill-tags">
+                        <span>Nmap</span><span>Wireshark</span><span>Kali
+                            Linux</span><span>CCNA</span><span>Metasploit</span>
+                    </div>
+                    <div class="card-shine"></div>
                 </div>
-                <div class="skill-category reveal">
-                    <h3><i class="fas fa-laptop-code"></i> Development</h3>
-                    <p>C, C++, Python, JavaScript, Bash</p>
+                <div class="skill-category reveal" data-tilt>
+                    <div class="skill-icon-wrapper">
+                        <i class="fas fa-laptop-code"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
+                    <h3>Development</h3>
+                    <p>Full-stack web development with modern frameworks, APIs, and cloud deployment practices.</p>
+                    <div class="skill-tags">
+                        <span>C/C++</span><span>Python</span><span>JavaScript</span><span>Node.js</span><span>React</span>
+                    </div>
+                    <div class="card-shine"></div>
                 </div>
-                <div class="skill-category reveal">
-                    <h3><i class="fas fa-graduation-cap"></i> Core CS</h3>
-                    <p>Data Structures, Algorithms, Networking</p>
+                <div class="skill-category reveal" data-tilt>
+                    <div class="skill-icon-wrapper">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
+                    <h3>Core CS</h3>
+                    <p>Strong foundation in computer science fundamentals, algorithms, and system architecture.</p>
+                    <div class="skill-tags">
+                        <span>DSA</span><span>Algorithms</span><span>Networking</span><span>OOPs</span><span>DBMS</span>
+                    </div>
+                    <div class="card-shine"></div>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 3rem;">
-                <a href="about.html" class="btn btn-outline">View All Skills</a>
+                <a href="about.html" class="btn btn-outline btn-futuristic">
+                    <span class="btn-text">View All Skills</span>
+                    <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                    <span class="btn-glow"></span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Journey Timeline Mini -->
+        <section class="journey-section" id="journey-section">
+            <div class="section-header">
+                <span class="section-tag">&lt;journey /&gt;</span>
+                <h2 class="section-title reveal">My Journey</h2>
+                <p class="section-subtitle reveal">From curiosity to code — my tech evolution</p>
+            </div>
+            <div class="journey-timeline">
+                <div class="journey-item reveal">
+                    <div class="journey-year">2026</div>
+                    <div class="journey-content">
+                        <h4>Advanced Development & Security</h4>
+                        <p>Building production-grade apps like MediLab, deepening into cloud & full-stack development.
+                        </p>
+                    </div>
+                </div>
+                <div class="journey-item reveal">
+                    <div class="journey-year">2025</div>
+                    <div class="journey-content">
+                        <h4>Started B.Tech in CSE</h4>
+                        <p>Joined MM University, Ambala. Began specializing in cybersecurity and ethical hacking.</p>
+                    </div>
+                </div>
+                <div class="journey-item reveal">
+                    <div class="journey-year">2024</div>
+                    <div class="journey-content">
+                        <h4>First Lines of Code</h4>
+                        <p>Discovered programming through C & Python. Built first projects and fell in love with tech.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="education.html" class="btn btn-outline btn-futuristic">
+                    <span class="btn-text">Full Academic Journey</span>
+                    <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                    <span class="btn-glow"></span>
+                </a>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-container reveal">
+                <div class="cta-bg-grid"></div>
+                <div class="cta-content-wrapper">
+                    <!-- Left: High-Tech Security Terminal -->
+                    <div class="cta-terminal wave-reveal" style="--reveal-delay: 1;">
+                        <div class="terminal-header">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                            <span class="terminal-title">sec_audit_bot.sh</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="term-line"><span class="term-prompt">gaurav@cyber-sec:~$</span> run
+                                security-audit --target new_project</div>
+                            <div class="term-line"><span class="term-output info">[INFO] Initializing security
+                                    checks...</span></div>
+                            <div class="term-line"><span class="term-output success"><i class="fas fa-check-circle"></i>
+                                    SQL Injection Protection: IMMUNE</span></div>
+                            <div class="term-line"><span class="term-output success"><i class="fas fa-check-circle"></i>
+                                    Cross-Site Scripting (XSS): SECURED</span></div>
+                            <div class="term-line"><span class="term-output success"><i class="fas fa-check-circle"></i>
+                                    Auth & Encryption (AES): VERIFIED</span></div>
+                            <div class="term-line"><span class="term-output success"><i class="fas fa-check-circle"></i>
+                                    API Rate Limiting: ACTIVE</span></div>
+                            <div class="term-line"><span class="term-output warning"><i
+                                        class="fas fa-shield-alt animate-pulse"></i> TARGET SYSTEM: READY TO SHIP &
+                                    SECURE</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Direct Client Pitch -->
+                    <div class="cta-pitch wave-reveal" style="--reveal-delay: 3;">
+                        <h2>Secure. Scalable. <span class="highlight">Unstoppable.</span></h2>
+                        <p>Don't just build a website. Hire a developer who constructs modern full-stack platforms with
+                            enterprise-level security baked in from the very first line of code. Let's design a fast,
+                            resilient, and stunning digital solution that elevates your business.</p>
+                        <div class="btn-group">
+                            <a href="contact.html" class="btn btn-primary btn-futuristic btn-lg">
+                                <span class="btn-text">Start Project</span>
+                                <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
+                                <span class="btn-glow"></span>
+                            </a>
+                            <a href="projects.html" class="btn btn-outline btn-futuristic btn-lg">
+                                <span class="btn-text">See Case Studies</span>
+                                <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                                <span class="btn-glow"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
     <footer>
-        <div class="social-links">
-            <a href="https://github.com/gaurav7080" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/in/its-me-gaurav" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://instagram.com/gaurav_raj1907" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="mailto:gauravrajsaidnagar@gmail.com"><i class="fas fa-envelope"></i></a>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="logo-bracket">&lt;</span>GAURAV<span class="logo-dot">.</span>DEV<span
+                    class="logo-bracket">/&gt;</span>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/gaurav7080" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/its-me-gaurav" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com/gaurav_raj1907" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:gauravrajsaidnagar@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>&copy; 2025 Gaurav Raj | Built with Passion & Code</p>
         </div>
-        <p>&copy; 2025 Gaurav Raj | Built with Passion</p>
     </footer>
 
     <!-- Custom Cursor -->

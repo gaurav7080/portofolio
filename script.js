@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   initMatrix();
+  initParticleUniverse();
   initCustomCursor();
   initHeaderScroll();
   initMobileMenu();
@@ -12,7 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initSkillCardTracking();
   initPreloader();
   initTypingAnimation();
+  initStatsCounter();
+  initScrollIndicator();
 });
+
 
 // ====== Matrix Rain Effect ======
 function initMatrix() {
@@ -427,16 +431,16 @@ function initPreloader() {
 
   // Show loader on internal link clicks for smooth transition
   const internalLinks = document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="#"]):not([href^="mailto:"]):not([href^="tel:"])');
-  
+
   internalLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
-      
+
       // Check if it's an internal page link
       if (href && (href.endsWith('.html') || !href.includes('.')) && !href.startsWith('http')) {
         e.preventDefault();
         loader.classList.remove('fade-out');
-        
+
         setTimeout(() => {
           window.location.href = href;
         }, 300); // Faster transition
@@ -455,7 +459,7 @@ function initTypingAnimation() {
     "Developer",
     "Cyber Expert"
   ];
-  
+
   let wordIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
@@ -463,7 +467,7 @@ function initTypingAnimation() {
 
   function type() {
     const currentWord = words[wordIndex];
-    
+
     if (isDeleting) {
       textElement.textContent = currentWord.substring(0, charIndex - 1);
       charIndex--;
@@ -488,3 +492,257 @@ function initTypingAnimation() {
 
   type();
 }
+
+// ====== 3D Particle Universe Backdrop ======
+function initParticleUniverse() {
+  const canvas = document.getElementById('particle-universe');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+
+  const particleCount = 120;
+  const particles = [];
+  const maxDistance = 150;
+  const fov = 300; // Field of view for 3D projection
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let targetRotationX = 0;
+  let targetRotationY = 0;
+  let rotationX = 0;
+  let rotationY = 0;
+
+  // Initialize 3D particles
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: (Math.random() - 0.5) * 1000,
+      y: (Math.random() - 0.5) * 1000,
+      z: (Math.random() - 0.5) * 1000,
+      radius: Math.random() * 2 + 1,
+      color: 'rgba(0, 255, 153, ' + (Math.random() * 0.5 + 0.3) + ')'
+    });
+  }
+
+  // Handle Mouse Move for Rotation & Interactivity
+  window.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX - width / 2) / (width / 2);
+    mouseY = (e.clientY - height / 2) / (height / 2);
+
+    targetRotationY = mouseX * 0.5;
+    targetRotationX = -mouseY * 0.5;
+  });
+
+  // Projection logic
+  function project(x, y, z) {
+    const scale = fov / (fov + z);
+    const projX = x * scale + width / 2;
+    const projY = y * scale + height / 2;
+    return { x: projX, y: projY, scale: scale };
+  }
+
+  // Rotate points in 3D space
+  function rotateY3D(point, angle) {
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    const x = point.x * cos - point.z * sin;
+    const z = point.x * sin + point.z * cos;
+    return { x: x, y: point.y, z: z };
+  }
+
+  function rotateX3D(point, angle) {
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    const y = point.y * cos - point.z * sin;
+    const z = point.y * sin + point.z * cos;
+    return { x: point.x, y: y, z: z };
+  }
+
+  // Render Loop
+  function draw() {
+    ctx.fillStyle = 'rgba(10, 10, 10, 0.2)'; // Smooth trail effect
+    ctx.fillRect(0, 0, width, height);
+
+    // Inertial rotation interpolation
+    rotationX += (targetRotationX - rotationX) * 0.05;
+    rotationY += (targetRotationY - rotationY) * 0.05;
+
+    // Automatic slow rotation when mouse is inactive
+    const autoAngleY = 0.001;
+    const autoAngleX = 0.0005;
+
+    const projectedPoints = [];
+
+    // Update, rotate and project particles
+    for (let i = 0; i < particles.length; i++) {
+      let p = particles[i];
+
+      // Auto rotation
+      let rotated = rotateY3D(p, autoAngleY + rotationY * 0.01);
+      rotated = rotateX3D(rotated, autoAngleX + rotationX * 0.01);
+
+      p.x = rotated.x;
+      p.y = rotated.y;
+      p.z = rotated.z;
+
+      // Make particles slowly drift forward in Z space
+      p.z -= 0.5;
+      if (p.z < -fov) {
+        p.z = fov; // Reset behind the camera
+      }
+
+      const proj = project(p.x, p.y, p.z);
+      projectedPoints.push({
+        x: proj.x,
+        y: proj.y,
+        scale: proj.scale,
+        color: p.color,
+        radius: p.radius * proj.scale
+      });
+    }
+
+    // Connect dots with futuristic plexus lines
+    for (let i = 0; i < projectedPoints.length; i++) {
+      const p1 = projectedPoints[i];
+      if (p1.x < 0 || p1.x > width || p1.y < 0 || p1.y > height) continue;
+
+      for (let j = i + 1; j < projectedPoints.length; j++) {
+        const p2 = projectedPoints[j];
+
+        const dx = p1.x - p2.x;
+        const dy = p1.y - p2.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < maxDistance) {
+          const alpha = (1 - dist / maxDistance) * 0.15 * p1.scale;
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(0, 255, 153, ${alpha})`;
+          ctx.lineWidth = 0.5 * p1.scale;
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw the individual star particles
+    for (let i = 0; i < projectedPoints.length; i++) {
+      const p = projectedPoints[i];
+      if (p.x < 0 || p.x > width || p.y < 0 || p.y > height) continue;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.shadowColor = '#00ff99';
+      ctx.shadowBlur = p.radius > 2 ? 8 : 0;
+      ctx.fill();
+    }
+
+    ctx.shadowBlur = 0; // Reset shadow for line drawing speed
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+}
+
+// ====== Stats Counter Animation ======
+function initStatsCounter() {
+  const statsSection = document.getElementById('stats-section');
+  if (!statsSection) return;
+
+  const numbers = document.querySelectorAll('.stat-number');
+  let animated = false;
+
+  const animateCounters = () => {
+    numbers.forEach(num => {
+      const target = parseInt(num.getAttribute('data-count'), 10);
+      let current = 0;
+      const duration = 2000; // 2 seconds
+      const stepTime = Math.max(Math.floor(duration / target), 30);
+
+      const counterInterval = setInterval(() => {
+        current += 1;
+        num.textContent = current;
+
+        if (current >= target) {
+          num.textContent = target + '+';
+          clearInterval(counterInterval);
+        }
+      }, stepTime);
+    });
+  };
+
+  const observerOptions = {
+    threshold: 0.3
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !animated) {
+        animateCounters();
+        animated = true;
+
+        // Fill the progress bar inside stat card too
+        const bars = entry.target.querySelectorAll('.stat-bar-fill');
+        bars.forEach(bar => {
+          bar.style.transform = 'scaleX(1)';
+        });
+      }
+    });
+  }, observerOptions);
+
+  observer.observe(statsSection);
+}
+
+// ====== Scroll Indicator Dots ======
+function initScrollIndicator() {
+  const indicator = document.getElementById('scrollIndicator');
+  if (!indicator) return;
+
+  const dots = document.querySelectorAll('.scroll-dot');
+  const sections = {
+    hero: document.getElementById('hero-section'),
+    stats: document.getElementById('stats-section'),
+    expertise: document.getElementById('expertise-section'),
+    journey: document.getElementById('journey-section')
+  };
+
+  // Scroll to section on dot click
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const sectionName = dot.getAttribute('data-section');
+      const section = sections[sectionName];
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Track scroll position to update dots
+  window.addEventListener('scroll', () => {
+    let current = '';
+
+    for (const [name, section] of Object.entries(sections)) {
+      if (!section) continue;
+      const rect = section.getBoundingClientRect();
+      // If the section is roughly in the middle of viewport
+      if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+        current = name;
+        break;
+      }
+    }
+
+    if (current) {
+      dots.forEach(dot => {
+        dot.classList.toggle('active', dot.getAttribute('data-section') === current);
+      });
+    }
+  });
+}
+
