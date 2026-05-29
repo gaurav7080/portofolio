@@ -3287,7 +3287,8 @@ body {
 }
 
 .btn-primary.btn-futuristic::before {
-    display: none !important; /* Remove laser effect for cleaner look */
+    display: none !important;
+    /* Remove laser effect for cleaner look */
 }
 
 /* Typography Clean Up */
@@ -3297,11 +3298,13 @@ body {
     font-weight: 600 !important;
     letter-spacing: 2px !important;
 }
+
 .section-title {
     text-shadow: none !important;
     color: #f8fafc !important;
     font-weight: 700 !important;
 }
+
 .section-subtitle {
     color: var(--text-dim) !important;
 }
@@ -3314,10 +3317,21 @@ body {
     backdrop-filter: blur(12px);
     border-radius: 12px !important;
 }
+
 .terminal-header {
     border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
     background: rgba(0, 0, 0, 0.2) !important;
 }
-.term-output.info { color: #38bdf8 !important; }
-.term-output.success { color: #34d399 !important; }
-.term-output.warning { color: #fbbf24 !important; text-shadow: none !important; }
+
+.term-output.info {
+    color: #38bdf8 !important;
+}
+
+.term-output.success {
+    color: #34d399 !important;
+}
+
+.term-output.warning {
+    color: #fbbf24 !important;
+    text-shadow: none !important;
+}
