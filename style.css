@@ -193,7 +193,8 @@ nav a.active::after {
 
 /* ====== Hero Section ====== */
 .hero.scroll-container {
-    height: 250vh; /* Gives room to scroll and scrub the animation */
+    height: 250vh;
+    /* Gives room to scroll and scrub the animation */
     position: relative;
     z-index: 10;
     padding: 0;
@@ -1113,9 +1114,20 @@ a {
         margin-bottom: -20px;
     }
 
-    .orbit-1 { width: 220px; height: 220px; }
-    .orbit-2 { width: 180px; height: 180px; }
-    .orbit-3 { width: 150px; height: 150px; }
+    .orbit-1 {
+        width: 220px;
+        height: 220px;
+    }
+
+    .orbit-2 {
+        width: 180px;
+        height: 180px;
+    }
+
+    .orbit-3 {
+        width: 150px;
+        height: 150px;
+    }
 
     .hero-content h2 {
         font-size: 1.8rem;
@@ -1636,6 +1648,7 @@ a {
 
 /* --- Extra Small (max-width: 360px) --- */
 @media (max-width: 360px) {
+
     .hero-content h2,
     .hero-title {
         font-size: 1.4rem;
@@ -2080,10 +2093,13 @@ a {
 }
 
 @keyframes scrollHintGlow {
-    0%, 100% {
+
+    0%,
+    100% {
         text-shadow: 0 0 5px var(--primary-glow);
         filter: brightness(1);
     }
+
     50% {
         text-shadow: 0 0 20px var(--primary-glow), 0 0 40px rgba(0, 255, 153, 0.2);
         filter: brightness(1.3);
