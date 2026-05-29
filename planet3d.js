@@ -228,7 +228,7 @@
 
     // Explosion mid-phase: particles scatter briefly between 0.3 and 0.7
     const explosionFactor = Math.sin(easedProgress * Math.PI); // peaks at 0.5
-    
+
     // --- Animate Hero DOM Elements (coming out of the planet) ---
     animateHeroElements(easedProgress);
 
@@ -437,16 +437,16 @@
 
   function applyAnim(el, phase) {
     if (!el) return;
-    
+
     // Phase 0 = deep inside planet (invisible)
     // Phase 1 = normal position (visible)
     const scale = 0.5 + (0.5 * phase); // scale from 0.5 to 1
     const yOffset = 100 * (1 - phase); // rise up from 100px below
     const blur = 10 * (1 - phase); // start blurred
-    
+
     // Add easing to phase
     const eased = easeInOutCubic(phase);
-    
+
     el.style.opacity = eased;
     el.style.transform = `translateY(${yOffset}px) scale(${scale})`;
     el.style.filter = `blur(${blur}px)`;
