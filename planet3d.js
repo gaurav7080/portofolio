@@ -12,8 +12,7 @@
 
   // --- Configuration ---
   const CONFIG = {
-    particleCount: 900,
-    textChar: 'NA',
+    particleCount: 5000,
     planetRadius: 140,
     ringInnerRadius: 180,
     ringOuterRadius: 320,
@@ -63,11 +62,11 @@
     CONFIG.fov = vmin * 0.8;
     // On mobile, fewer particles for performance
     if (canvas.offsetWidth < 600) {
-      CONFIG.particleCount = 500;
+      CONFIG.particleCount = 2000;
     } else if (canvas.offsetWidth < 900) {
-      CONFIG.particleCount = 700;
+      CONFIG.particleCount = 3500;
     } else {
-      CONFIG.particleCount = 900;
+      CONFIG.particleCount = 5000;
     }
     if (particles.length !== CONFIG.particleCount) {
       initParticles();
@@ -87,14 +86,10 @@
       this.cy = this.py;
       this.cz = this.pz;
       // Visual
-      this.size = 1 + Math.random() * 2;
-      this.alpha = 0.4 + Math.random() * 0.6;
+      this.size = 0.4 + Math.random() * 1.2;
+      this.alpha = 0.3 + Math.random() * 0.7;
       this.alphaOffset = Math.random() * Math.PI * 2;
       this.pulseSpeed = 0.5 + Math.random() * 2;
-      // Which NA character
-      this.char = CONFIG.textChar[index % CONFIG.textChar.length];
-      this.useText = Math.random() > 0.4; // 60% show text, 40% dots
-      this.textSize = 6 + Math.random() * 5;
       // Explosion velocity (for intermediate states)
       this.explodeVx = (Math.random() - 0.5) * 4;
       this.explodeVy = (Math.random() - 0.5) * 4;
@@ -277,9 +272,6 @@
         z: rotated.z,
         size: p.size * proj.scale,
         alpha: p.alpha * pulseAlpha * depthAlpha,
-        char: p.char,
-        useText: p.useText,
-        textSize: p.textSize * proj.scale,
         index: i,
       });
     }
@@ -309,39 +301,26 @@
     }
 
     // --- Draw Particles ---
-    // (Optimized: removed per-particle shadowBlur and createRadialGradient for performance)
     for (let i = 0; i < projected.length; i++) {
       const p = projected[i];
 
       // Glow effect (simplified for performance)
-      if (p.size > 1.5) {
+      // Soft glow halo on brighter dots
+      if (p.size > 0.8) {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
-        ctx.fillStyle = CONFIG.glowColor + (p.alpha * 0.2) + ')';
+        ctx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = CONFIG.glowColor + (p.alpha * 0.12) + ')';
         ctx.fill();
       }
 
-      if (p.useText && p.textSize > 4) {
-        // Draw text particle
-        ctx.font = `${Math.max(5, p.textSize)}px 'Space Grotesk', monospace`;
-        ctx.fillStyle = CONFIG.glowColor + p.alpha + ')';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(p.char, p.x, p.y);
-      } else {
-        // Draw dot particle
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, Math.max(0.5, p.size), 0, Math.PI * 2);
-
-        // Color variation based on depth
-        const colorMix = (p.z + CONFIG.fov) / (CONFIG.fov * 2);
-        if (colorMix > 0.6) {
-          ctx.fillStyle = CONFIG.accentGlow + p.alpha + ')';
-        } else {
-          ctx.fillStyle = CONFIG.glowColor + p.alpha + ')';
-        }
-        ctx.fill();
-      }
+      // Draw tiny dot particle
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, Math.max(0.3, p.size), 0, Math.PI * 2);
+      const colorMix = (p.z + CONFIG.fov) / (CONFIG.fov * 2);
+      ctx.fillStyle = colorMix > 0.6
+        ? CONFIG.accentGlow + p.alpha + ')'
+        : CONFIG.glowColor + p.alpha + ')';
+      ctx.fill();
     }
 
     // --- Draw Central Core Glow (planet mode) ---
