@@ -1055,6 +1055,7 @@ a {
     }
 
     .hero-content {
+        padding-top: 110px;
         order: 2;
         width: 100%;
     }
@@ -1067,6 +1068,7 @@ a {
     }
 
     .profile-img-wrapper {
+        margin-top: 270px;
         width: 240px;
         height: 240px;
     }
