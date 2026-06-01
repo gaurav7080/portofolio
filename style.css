@@ -3985,3 +3985,14 @@ body {
         display: none;
     }
 }
+
+@media screen 
+{
+    .btn-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+    
+}
