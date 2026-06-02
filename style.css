@@ -4353,3 +4353,64 @@ body {
         padding: 0.28rem 0.45rem;
     }
 }
+
+@media (max-width: 992px) {
+    #navbar {
+        gap: 1rem;
+        background: rgba(8, 10, 12, 0.96);
+        backdrop-filter: blur(18px);
+        perspective: none;
+    }
+
+    #navbar a {
+        width: min(78vw, 280px);
+        min-width: 0;
+        padding: 0.85rem 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+            rgba(0, 0, 0, 0.16);
+        color: var(--text-main);
+        backdrop-filter: blur(12px);
+        box-shadow:
+            0 10px 24px rgba(0, 0, 0, 0.16),
+            0 1px 0 rgba(255, 255, 255, 0.08) inset;
+        text-align: center;
+        transform: none;
+        animation: none;
+    }
+
+    #navbar a::before {
+        display: none;
+    }
+
+    #navbar a::after {
+        display: none;
+    }
+
+    #navbar a:hover {
+        border-color: rgba(0, 255, 153, 0.26);
+        background:
+            linear-gradient(180deg, rgba(0, 255, 153, 0.09), rgba(255, 255, 255, 0.025)),
+            rgba(0, 0, 0, 0.18);
+        box-shadow:
+            0 12px 28px rgba(0, 0, 0, 0.2),
+            0 0 18px rgba(0, 255, 153, 0.08),
+            0 1px 0 rgba(255, 255, 255, 0.1) inset;
+        transform: none;
+    }
+
+    #navbar a.active {
+        border-color: rgba(0, 255, 153, 0.45);
+        background:
+            linear-gradient(180deg, rgba(0, 255, 153, 0.14), rgba(0, 255, 153, 0.045)),
+            rgba(0, 0, 0, 0.22);
+        color: var(--primary);
+        box-shadow:
+            0 12px 30px rgba(0, 0, 0, 0.22),
+            0 0 20px rgba(0, 255, 153, 0.12),
+            0 1px 0 rgba(255, 255, 255, 0.12) inset;
+        text-shadow: none;
+    }
+}
