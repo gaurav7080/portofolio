@@ -4045,12 +4045,12 @@ body {
 
     #hero-section .hero-image {
         align-items: center;
-        margin-bottom: 0.35rem;
+        margin-bottom: 0.2rem;
     }
 
     #hero-section .profile-3d-container {
-        width: clamp(168px, 52vw, 224px);
-        height: clamp(168px, 52vw, 224px);
+        width: clamp(238px, 76vw, 310px);
+        height: clamp(238px, 76vw, 310px);
         margin: 0 auto;
         padding: 0;
         border: 0;
@@ -4061,14 +4061,43 @@ body {
     }
 
     #hero-section .profile-img-wrapper {
-        width: 100%;
-        height: 100%;
+        width: clamp(168px, 58vw, 235px);
+        height: clamp(168px, 58vw, 235px);
         margin: 0;
         overflow: hidden;
         border: 2px solid var(--primary);
         border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
         animation: morph 8s ease-in-out infinite;
         box-shadow: 0 0 22px rgba(0, 255, 153, 0.2);
+        z-index: 3;
+    }
+
+    #hero-section .orbit-ring {
+        display: block !important;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        z-index: 1;
+    }
+
+    #hero-section .orbit-1 {
+        width: 94%;
+        height: 94%;
+        border-style: dashed;
+        border-color: rgba(0, 255, 153, 0.26);
+    }
+
+    #hero-section .orbit-2 {
+        width: 82%;
+        height: 82%;
+        border-style: dotted;
+        border-color: rgba(0, 255, 153, 0.38);
+    }
+
+    #hero-section .orbit-3 {
+        width: 68%;
+        height: 68%;
+        border-color: rgba(0, 255, 153, 0.16);
     }
 
     #hero-section .profile-img-wrapper::before,
@@ -4081,6 +4110,37 @@ body {
         border-radius: inherit;
         animation: none;
         box-shadow: none;
+    }
+
+    #hero-section .floating-tech {
+        display: flex !important;
+        width: clamp(30px, 8.5vw, 38px);
+        height: clamp(30px, 8.5vw, 38px);
+        font-size: clamp(0.86rem, 3.2vw, 1.08rem);
+        background: rgba(10, 10, 10, 0.76);
+        border-color: rgba(0, 255, 153, 0.42);
+        box-shadow: 0 0 14px rgba(0, 255, 153, 0.25);
+        z-index: 4;
+    }
+
+    #hero-section .floating-tech-1 {
+        top: 18%;
+        left: 16%;
+    }
+
+    #hero-section .floating-tech-2 {
+        top: 23%;
+        right: 11%;
+    }
+
+    #hero-section .floating-tech-3 {
+        bottom: 19%;
+        left: 12%;
+    }
+
+    #hero-section .floating-tech-4 {
+        right: 16%;
+        bottom: 14%;
     }
 
     #hero-section .hero-content {
@@ -4154,8 +4214,19 @@ body {
 
 @media (max-width: 380px) {
     #hero-section .profile-3d-container {
-        width: clamp(150px, 47vw, 178px);
-        height: clamp(150px, 47vw, 178px);
+        width: clamp(220px, 72vw, 250px);
+        height: clamp(220px, 72vw, 250px);
+    }
+
+    #hero-section .profile-img-wrapper {
+        width: clamp(152px, 54vw, 186px);
+        height: clamp(152px, 54vw, 186px);
+    }
+
+    #hero-section .floating-tech {
+        width: 29px;
+        height: 29px;
+        font-size: 0.82rem;
     }
 
     #hero-section .hero-title {
