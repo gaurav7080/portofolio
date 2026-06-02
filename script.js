@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTypingAnimation();
   initStatsCounter();
   initScrollIndicator();
+  initContactExperience();
 });
 
 
@@ -317,8 +318,38 @@ function initScrollProgress() {
 function initContactForm() {
   const form = document.getElementById('messageForm');
   const status = document.getElementById('formStatus');
+  const message = document.getElementById('message');
+  const messageCount = document.getElementById('messageCount');
+  const messageMeter = document.getElementById('messageMeter');
 
   if (!form) return;
+
+  const updateMessageMeter = () => {
+    if (!message || !messageCount || !messageMeter) return;
+    const length = message.value.trim().length;
+    const max = 240;
+    const percent = Math.min((length / max) * 100, 100);
+
+    messageCount.textContent = `${length} / ${max}`;
+    messageMeter.style.width = `${percent}%`;
+  };
+
+  updateMessageMeter();
+  if (message) {
+    message.addEventListener('input', updateMessageMeter);
+  }
+
+  document.querySelectorAll('.topic-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (!message) return;
+
+      document.querySelectorAll('.topic-chip').forEach(item => item.classList.remove('active'));
+      chip.classList.add('active');
+      message.value = chip.dataset.message || '';
+      message.focus();
+      updateMessageMeter();
+    });
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -342,6 +373,8 @@ function initContactForm() {
         status.innerHTML = 'Message sent successfully!';
         status.style.color = '#00ff99';
         form.reset();
+        document.querySelectorAll('.topic-chip').forEach(chip => chip.classList.remove('active'));
+        updateMessageMeter();
       } else {
         status.innerHTML = 'Oops! There was a problem sending your message.';
         status.style.color = '#ff4d4d';
@@ -353,6 +386,57 @@ function initContactForm() {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnText;
     }
+  });
+}
+
+function initContactExperience() {
+  const copyButtons = document.querySelectorAll('.contact-copy[data-copy]');
+
+  copyButtons.forEach(button => {
+    const defaultHTML = button.innerHTML;
+
+    button.addEventListener('click', async () => {
+      const value = button.dataset.copy;
+      if (!value) return;
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(value);
+        } else {
+          const tempInput = document.createElement('textarea');
+          tempInput.value = value;
+          tempInput.setAttribute('readonly', '');
+          tempInput.style.position = 'fixed';
+          tempInput.style.opacity = '0';
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          tempInput.remove();
+        }
+        button.classList.add('copied');
+        button.innerHTML = '<i class="fas fa-check"></i>';
+        setTimeout(() => {
+          button.classList.remove('copied');
+          button.innerHTML = defaultHTML;
+        }, 1400);
+      } catch (error) {
+        button.innerHTML = '<i class="fas fa-exclamation"></i>';
+        setTimeout(() => {
+          button.innerHTML = defaultHTML;
+        }, 1400);
+      }
+    });
+  });
+
+  document.querySelectorAll('.contact-panel, .contact-form').forEach(panel => {
+    panel.addEventListener('mousemove', (e) => {
+      const rect = panel.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+      panel.style.setProperty('--mouse-x', `${x}%`);
+      panel.style.setProperty('--mouse-y', `${y}%`);
+    });
   });
 }
 
@@ -745,4 +829,3 @@ function initScrollIndicator() {
     }
   });
 }
-

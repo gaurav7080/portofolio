@@ -42,21 +42,54 @@
         <section class="contact-section">
             <h2 class="section-title reveal">Get In Touch</h2>
             <div class="contact-container">
-                <div class="contact-info reveal">
-                    <h3>Let's talk about everything!</h3>
-                    <p>Don't like forms? Send me an email or find me on social media.</p>
+                <div class="contact-info contact-panel reveal">
+                    <div class="contact-status-card">
+                        <span class="status-pulse"></span>
+                        <div>
+                            <span class="status-label">Available</span>
+                            <strong>Open for projects, internships & collabs</strong>
+                        </div>
+                    </div>
+
+                    <h3>Let's build something secure and useful.</h3>
+                    <p>Choose a channel, copy details in one tap, or use the smart form to send a focused message.</p>
+
+                    <div class="contact-mini-stats">
+                        <div>
+                            <strong>24h</strong>
+                            <span>Reply target</span>
+                        </div>
+                        <div>
+                            <strong>3+</strong>
+                            <span>Focus areas</span>
+                        </div>
+                    </div>
+
                     <div class="contact-details">
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>gauravrajsaidnagar@gmail.com</span>
+                            <div>
+                                <small>Email</small>
+                                <span>gauravrajsaidnagar@gmail.com</span>
+                            </div>
+                            <button class="contact-copy" type="button" data-copy="gauravrajsaidnagar@gmail.com"
+                                aria-label="Copy email"><i class="far fa-copy"></i></button>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <span>+91 7368824064</span>
+                            <div>
+                                <small>Phone</small>
+                                <span>+91 7368824064</span>
+                            </div>
+                            <button class="contact-copy" type="button" data-copy="+91 7368824064"
+                                aria-label="Copy phone"><i class="far fa-copy"></i></button>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>Ambala, Haryana</span>
+                            <div>
+                                <small>Location</small>
+                                <span>Ambala, Haryana</span>
+                            </div>
                         </div>
                         <div class="contact-item" style="margin-top: 1rem;">
                             <a href="MyResume.pdf" download class="btn btn-outline" style="width: 100%;">Download CV <i
@@ -67,6 +100,18 @@
 
                 <div class="contact-form-wrapper reveal">
                     <form id="messageForm" action="https://formspree.io/f/xwpneoqb" method="POST" class="contact-form">
+                        <div class="form-console">
+                            <span class="console-dot"></span>
+                            <span>secure-message://compose</span>
+                        </div>
+                        <div class="topic-chips" aria-label="Message topics">
+                            <button type="button" class="topic-chip"
+                                data-message="Hi Gaurav, I want to discuss a cybersecurity project.">Cybersecurity</button>
+                            <button type="button" class="topic-chip"
+                                data-message="Hi Gaurav, I need help building a modern full-stack web experience.">Web Project</button>
+                            <button type="button" class="topic-chip"
+                                data-message="Hi Gaurav, I would like to connect regarding an internship or collaboration opportunity.">Opportunity</button>
+                        </div>
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" name="name" placeholder="John Doe" required>
@@ -79,6 +124,12 @@
                             <label for="message">Your Message</label>
                             <textarea id="message" name="message" rows="5" placeholder="How can I help you?"
                                 required></textarea>
+                        </div>
+                        <div class="message-meter" aria-live="polite">
+                            <span id="messageCount">0 / 240</span>
+                            <div class="meter-track">
+                                <span id="messageMeter"></span>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Send Message <i
                                 class="fas fa-paper-plane"></i></button>
