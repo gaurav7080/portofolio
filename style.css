@@ -4074,9 +4074,8 @@ body {
 
     #hero-section .orbit-ring {
         display: block !important;
-        top: 50%;
-        left: 50%;
-        translate: -50% -50%;
+        inset: 0;
+        margin: auto;
         z-index: 1;
     }
 
