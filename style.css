@@ -4409,15 +4409,14 @@ body {
     }
 }
 
-@media screen 
-{
-    .btn-group{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
-}
-    
+@media screen {
+    .btn-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2rem;
+    }
+
 }
 
 @media (max-width: 768px) {
@@ -4776,4 +4775,8 @@ body {
     .contact-item .btn {
         white-space: normal;
     }
+}
+
+.contact-item .btn {
+    white-space: normal;
 }
