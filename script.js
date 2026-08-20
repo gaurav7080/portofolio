@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTiltEffect();
   initScrollProgress();
   initProfileModal();
+  initProjectPreview();
   initSkillCardTracking();
   initPreloader();
   initTypingAnimation();
@@ -483,6 +484,115 @@ function initProfileModal() {
       modal.classList.remove('active');
     }
   });
+}
+
+// ====== Project Preview Modal ======
+function initProjectPreview() {
+  const previewButtons = document.querySelectorAll('.project-preview');
+  if (!previewButtons.length) return;
+
+  const modal = document.createElement('div');
+  modal.className = 'project-preview-modal';
+  modal.innerHTML = `
+        <div class="project-preview-card">
+            <button class="project-preview-close" type="button" aria-label="Close preview">&times;</button>
+            <div class="project-preview-media">
+          <img class="project-preview-image" alt="Project preview">
+          <div class="project-preview-fallback">
+            <i class="fas fa-image"></i>
+          </div>
+            </div>
+            <div class="project-preview-body">
+                <p class="project-preview-kicker">Project Preview</p>
+                <h2 class="project-preview-title"></h2>
+                <p class="project-preview-description"></p>
+                <div class="project-preview-tags"></div>
+            </div>
+        </div>
+    `;
+  document.body.appendChild(modal);
+
+  const closeBtn = modal.querySelector('.project-preview-close');
+  const imageEl = modal.querySelector('.project-preview-image');
+  const fallbackEl = modal.querySelector('.project-preview-fallback');
+  const titleEl = modal.querySelector('.project-preview-title');
+  const descEl = modal.querySelector('.project-preview-description');
+  const tagsEl = modal.querySelector('.project-preview-tags');
+  const cardEl = modal.querySelector('.project-preview-card');
+
+  const openPreview = (button) => {
+    const title = button.dataset.projectTitle || 'Project Preview';
+    const description = button.dataset.projectDescription || '';
+    const image = button.dataset.projectImage || createProjectArtwork(title, button.dataset.projectIcon || 'fa-image');
+    const tags = (button.dataset.projectTags || '').split('|').map(tag => tag.trim()).filter(Boolean);
+    const icon = button.dataset.projectIcon || 'fa-image';
+
+    titleEl.textContent = title;
+    descEl.textContent = description;
+    tagsEl.innerHTML = tags.map(tag => `<span>${tag}</span>`).join('');
+
+    if (image) {
+      imageEl.src = image;
+      imageEl.alt = title;
+      imageEl.style.display = 'block';
+      imageEl.classList.remove('is-hidden');
+      fallbackEl.style.display = 'none';
+    } else {
+      imageEl.removeAttribute('src');
+      imageEl.style.display = 'none';
+      imageEl.classList.add('is-hidden');
+      fallbackEl.innerHTML = `<i class="fas ${icon}"></i>`;
+      fallbackEl.style.display = 'flex';
+    }
+
+    modal.classList.add('active');
+    cardEl.classList.remove('flash');
+    void cardEl.offsetWidth;
+    cardEl.classList.add('flash');
+  };
+
+  previewButtons.forEach(button => {
+    button.addEventListener('click', () => openPreview(button));
+  });
+
+  const closePreview = () => {
+    modal.classList.remove('active');
+  };
+
+  closeBtn.addEventListener('click', closePreview);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closePreview();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePreview();
+  });
+
+  function createProjectArtwork(title, icon) {
+    const safeTitle = title.replace(/[<&>]/g, '').slice(0, 28);
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+        <defs>
+          <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0f172a" />
+            <stop offset="45%" stop-color="#111827" />
+            <stop offset="100%" stop-color="#020617" />
+          </linearGradient>
+          <radialGradient id="glow" cx="50%" cy="35%" r="60%">
+            <stop offset="0%" stop-color="rgba(0,255,153,0.28)" />
+            <stop offset="100%" stop-color="rgba(0,255,153,0)" />
+          </radialGradient>
+        </defs>
+        <rect width="1400" height="900" fill="url(#bg)" />
+        <rect width="1400" height="900" fill="url(#glow)" />
+        <circle cx="700" cy="300" r="120" fill="rgba(255,255,255,0.06)" />
+        <circle cx="700" cy="300" r="78" fill="rgba(0,255,153,0.16)" />
+        <text x="700" y="610" fill="#f5f5f5" font-family="Space Grotesk, Arial, sans-serif" font-size="64" font-weight="700" text-anchor="middle">${safeTitle}</text>
+        <text x="700" y="680" fill="#9ca3af" font-family="Outfit, Arial, sans-serif" font-size="28" text-anchor="middle">${icon.replace('fa-', '').replace('-', ' ')}</text>
+      </svg>
+    `;
+    return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+  }
 }
 
 // ====== Skill Card Mouse Tracking ======
