@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Gaurav Dev logo</title>
+  <desc id="desc">Minimal G developer monogram</desc>
+  <rect width="64" height="64" rx="15" fill="#0a0d0c"/>
+  <path d="M17 13 8 22v20l9 9" fill="none" stroke="#00e88a" stroke-linecap="square" stroke-linejoin="miter" stroke-width="3"/>
+  <path d="M47 13 56 22v20l-9 9" fill="none" stroke="#00e88a" stroke-linecap="square" stroke-linejoin="miter" stroke-width="3"/>
+  <path d="M41 19.5A14.5 14.5 0 0 0 32 16c-9 0-15 6.7-15 16s6 16 15 16c3.4 0 6.5-.9 9-2.7V32H31" fill="none" stroke="#f4fff9" stroke-linecap="square" stroke-linejoin="miter" stroke-width="5"/>
+  <path d="M40 43h8" stroke="#00e88a" stroke-linecap="square" stroke-width="3"/>
+</svg>
